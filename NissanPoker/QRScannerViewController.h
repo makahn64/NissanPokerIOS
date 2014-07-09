@@ -10,6 +10,8 @@
 
 @interface QRScannerViewController : UIViewController <UIAlertViewDelegate, AVCaptureMetadataOutputObjectsDelegate>
 
+@property (nonatomic, strong) Customer *customer;
+
 + (NSArray *)getValidQRTargetValues;
 
 @end

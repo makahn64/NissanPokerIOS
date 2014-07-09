@@ -7,6 +7,7 @@
 //
 
 #import "QRScannerViewController.h"
+#import "PlayingCard+WithInterface.h"
 
 #define UI_ALERTVIEW_QR_SCANNED 250
 #define UI_ALERTVIEW_LAST_QR_SCANNED 200
@@ -157,7 +158,9 @@
 
 - (void)alertQRScanned:(NSString *)qrMessage
 {
-    PokerCard *newCard = [[AppDelegate sharedAppDelegate].currentPlayer getNewCard];
+    
+    PokerCard *newCard = [[AppDelegate sharedAppDelegate] dealCard];
+    [self.customer addPokerHandObject:[PlayingCard playingCardFromPokerCard:newCard]];
     
     if ([self.validQRTargetValues count] > 0)
     {
@@ -183,6 +186,7 @@
         
         [alertLastQRValue show];
     }
+    
 }
 
 - (IBAction)quitTapped:(id)sender
@@ -200,6 +204,7 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    /*
     if (alertView.tag == UI_ALERTVIEW_QR_SCANNED)
     {
         [self.captureSession startRunning];
@@ -221,6 +226,7 @@
         
         }
     }
+     */
 }
 
 - (IBAction)helpTapped:(id)sender

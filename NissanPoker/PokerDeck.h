@@ -1,5 +1,5 @@
 //
-//  CardDeck.h
+//  PokerDeck.h
 //  NissanPoker
 //
 //  Created by Jasper Kahn on 7/7/14.
@@ -15,5 +15,8 @@
 - (void)resetDeck;                  //refills deck and shuffles
 - (PokerCard *)drawCard;          //Draws the top card
 - (PokerCard *)drawCardRandomly;  //Draws from a random index
+
+- (NSArray *)asArrayOfNumbers;
++ (PokerDeck *)newFromArrayOfNumbers;
 
 @end

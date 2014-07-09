@@ -20,9 +20,26 @@
 
 + (NSArray *)validSuits
 {
-    return @[@" ?",@"Spades",@"Hearts",@"Clubs",@"Diamonds"];
+    return @[@" ?" ,@"Clubs",@"Diamonds", @"Hearts", @"Spades"];
 }
 
+#pragma mark - Numeric Getters
+
+-(int)suitNumeric{
+    
+    return [[PokerCard validSuits] indexOfObject:self.suit];
+}
+
+
+-(int)rankNumeric{
+    return [[PokerCard validRanks] indexOfObject:self.rank];
+
+}
+
+-(int)cardNumeric{
+    
+    return [self suitNumeric] << 16 | [self rankNumeric];
+}
 
 #pragma mark - Rank & Suit Setters
 
@@ -169,6 +186,19 @@
     {
         _rankSuit = [_rank stringByAppendingString:(_suit)];
     }
+}
+
++(PokerCard *)cardFromNumeric:(int)numericValue{
+    
+    int suitNumeric = (numericValue & 0xff00) >> 16;
+    int rankNumeric = (numericValue & 0x00ff);
+    
+    PokerCard *newCard = [[PokerCard alloc] init];
+    [newCard setRankNumeric:rankNumeric];
+    [newCard setSuitNumeric:suitNumeric];
+    
+    return newCard;
+    
 }
 
 

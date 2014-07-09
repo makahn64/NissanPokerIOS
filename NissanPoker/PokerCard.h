@@ -16,6 +16,9 @@
 
 - (void)setRankNumeric: (int)rank;
 - (void)setSuitNumeric: (int)suit;
+-(int)suitNumeric;
+-(int)rankNumeric;
+-(int)cardNumeric;
 
 - (BOOL)isFaceCard;
 - (BOOL)isJoker;
@@ -24,5 +27,7 @@
 + (int)minSuitIndex;
 + (int)minRankIndexAceLow: (BOOL)aceLow;
 + (int)maxRankIndexAceLow: (BOOL)aceLow;
+
++(PokerCard *)cardFromNumeric:(int)numericValue;
 
 @end

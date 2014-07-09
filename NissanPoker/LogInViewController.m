@@ -7,6 +7,7 @@
 //
 
 #import "LogInViewController.h"
+#import "QRScannerViewController.h"
 
 #define FIRST_NAME_TEXT_FIELD 100
 #define LAST_NAME_TEXT_FIELD 101
@@ -235,13 +236,17 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    AppDelegate *AD = [AppDelegate sharedAppDelegate];
+    AppDelegate *appD = [AppDelegate sharedAppDelegate];
     
-    AD.currentPlayer = [[PokerPlayer alloc] init];
+    Customer *c = [appD getNewCustomer];
+    c.firstName = self.firstNameField.text;
+    c.lastName = self.lastNameField.text;
+    c.emailAddress = self.emailField.text;
+    [appD saveContext];
     
-    AD.currentPlayer.firstName = self.firstNameField.text;
-    AD.currentPlayer.lastName = self.lastNameField.text;
-    AD.currentPlayer.emailAddress = self.emailField.text;
+    QRScannerViewController *qvc = (QRScannerViewController *)[segue destinationViewController];
+    qvc.customer = c;
+    
 }
 
 

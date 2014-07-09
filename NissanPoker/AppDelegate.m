@@ -54,6 +54,40 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - Da Game
+
+
+#pragma mark - Player Gets and Saves
+
+-(Customer *)getNewCustomer{
+    
+    Customer *newCustomer = [NSEntityDescription
+                                    insertNewObjectForEntityForName:@"Customer"
+                                    inManagedObjectContext:[self managedObjectContext]];
+    
+    newCustomer.createdTime = [NSNumber numberWithDouble: round( [[NSDate date] timeIntervalSince1970])];
+    newCustomer.uploaded = [NSNumber numberWithBool:NO];
+    newCustomer.currentPlayer = [NSNumber numberWithBool:YES];
+    [self saveContext];
+    
+    // Shuffle up an deal
+    
+    self.pokerDeck = [PokerDeck new];
+    
+    return newCustomer;
+}
+
+- (PokerCard *)dealCard{
+    
+    return [self.pokerDeck drawCard];
+}
+
+-(void)saveContext{
+    
+    [[self managedObjectContext] save:nil];
+
+}
+
 #pragma mark - Core Data stack
 
 - (NSURL *)applicationDocumentsDirectory
@@ -85,7 +119,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"FittMixxModel" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"NissanPokerModel" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -98,7 +132,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"FittMixx.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"NissanPoker.sqlite"];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

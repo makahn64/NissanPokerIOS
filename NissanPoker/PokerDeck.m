@@ -33,6 +33,36 @@
     return self;
 }
 
+- (instancetype)initWithArray:(NSArray *)inputArray
+{
+    self = [super init];
+    
+    if (self)
+    {
+        
+        [self createOrClearDeck];
+        for (NSNumber *cval in inputArray) {
+            PokerCard *card = [PokerCard cardFromNumeric:[cval intValue]];
+            [self.deck addObject:card];
+        }
+        
+    }
+    
+    return self;
+}
+
+-(void)createOrClearDeck{
+    
+    if (self.deck != nil)
+    {
+        [self.deck removeAllObjects];
+    }
+    else
+    {
+        self.deck = [[NSMutableArray alloc] init];
+    }
+
+}
 
 #pragma mark - Methods
 
@@ -53,14 +83,7 @@
 
 - (void)resetDeck;
 {
-    if (self.deck != nil)
-    {
-        [self.deck removeAllObjects];
-    }
-    else
-    {
-        self.deck = [[NSMutableArray alloc] init];
-    }
+    [self createOrClearDeck];
     
     for (int suit = [PokerCard minSuitIndex]; suit <= [PokerCard maxSuitIndex]; suit++)
     {
@@ -93,6 +116,26 @@
     [self.deck removeObjectAtIndex:(randIndex)];
     return card;
 }
+
+- (NSArray *)asArrayOfNumbers{
+    
+    NSMutableArray *rval = [NSMutableArray new];
+    for (PokerCard *card in self.deck) {
+        int cval = [card cardNumeric];
+        [rval addObject:[NSNumber numberWithInt:cval]];
+    }
+    
+    return rval;
+    
+}
+
++ (PokerDeck *)newFromArrayOfNumbers:(NSArray *)inputArray{
+    
+   return [[PokerDeck alloc] initWithArray:inputArray];
+    
+}
+
+
 
 
 @end

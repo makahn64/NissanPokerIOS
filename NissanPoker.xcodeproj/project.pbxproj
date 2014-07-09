@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EA10D22196DBEE000367DE6 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA10D21196DBEE000367DE6 /* Customer.m */; };
+		1EA10D28196DE49900367DE6 /* PlayingCard+WithInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA10D27196DE49900367DE6 /* PlayingCard+WithInterface.m */; };
+		1EA10D2B196DE59100367DE6 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA10D2A196DE59100367DE6 /* PlayingCard.m */; };
 		80143CA4196B061600B6CB88 /* NissanPokerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80143CA2196B061600B6CB88 /* NissanPokerModel.xcdatamodeld */; };
-		80143CA7196B087400B6CB88 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CA6196B087400B6CB88 /* PlayingCard.m */; };
-		80143CAA196B087500B6CB88 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CA9196B087500B6CB88 /* Customer.m */; };
 		80143CAD196B0EF900B6CB88 /* PokerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CAC196B0EF900B6CB88 /* PokerPlayer.m */; };
 		80143CB0196B10BE00B6CB88 /* PokerCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CAF196B10BE00B6CB88 /* PokerCard.m */; };
 		80143CB3196B10CD00B6CB88 /* PokerDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CB2196B10CD00B6CB88 /* PokerDeck.m */; };
@@ -45,11 +46,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EA10D20196DBEE000367DE6 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Customer.h; path = NissanPoker/Customer.h; sourceTree = "<group>"; };
+		1EA10D21196DBEE000367DE6 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Customer.m; path = NissanPoker/Customer.m; sourceTree = "<group>"; };
+		1EA10D26196DE49900367DE6 /* PlayingCard+WithInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlayingCard+WithInterface.h"; sourceTree = "<group>"; };
+		1EA10D27196DE49900367DE6 /* PlayingCard+WithInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PlayingCard+WithInterface.m"; sourceTree = "<group>"; };
+		1EA10D29196DE59100367DE6 /* PlayingCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingCard.h; path = NissanPoker/PlayingCard.h; sourceTree = "<group>"; };
+		1EA10D2A196DE59100367DE6 /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCard.m; path = NissanPoker/PlayingCard.m; sourceTree = "<group>"; };
 		80143CA3196B061600B6CB88 /* NissanPokerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NissanPokerModel.xcdatamodel; sourceTree = "<group>"; };
-		80143CA5196B087400B6CB88 /* PlayingCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingCard.h; path = NissanPoker/PlayingCard.h; sourceTree = "<group>"; };
-		80143CA6196B087400B6CB88 /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCard.m; path = NissanPoker/PlayingCard.m; sourceTree = "<group>"; };
-		80143CA8196B087500B6CB88 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Customer.h; path = NissanPoker/Customer.h; sourceTree = "<group>"; };
-		80143CA9196B087500B6CB88 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Customer.m; path = NissanPoker/Customer.m; sourceTree = "<group>"; };
 		80143CAB196B0EF900B6CB88 /* PokerPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerPlayer.h; sourceTree = "<group>"; };
 		80143CAC196B0EF900B6CB88 /* PokerPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerPlayer.m; sourceTree = "<group>"; };
 		80143CAE196B10BE00B6CB88 /* PokerCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerCard.h; sourceTree = "<group>"; };
@@ -115,11 +118,13 @@
 		80143CA1196B05FA00B6CB88 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				1EA10D29196DE59100367DE6 /* PlayingCard.h */,
+				1EA10D2A196DE59100367DE6 /* PlayingCard.m */,
 				80143CA2196B061600B6CB88 /* NissanPokerModel.xcdatamodeld */,
-				80143CA8196B087500B6CB88 /* Customer.h */,
-				80143CA9196B087500B6CB88 /* Customer.m */,
-				80143CA5196B087400B6CB88 /* PlayingCard.h */,
-				80143CA6196B087400B6CB88 /* PlayingCard.m */,
+				1EA10D26196DE49900367DE6 /* PlayingCard+WithInterface.h */,
+				1EA10D27196DE49900367DE6 /* PlayingCard+WithInterface.m */,
+				1EA10D20196DBEE000367DE6 /* Customer.h */,
+				1EA10D21196DBEE000367DE6 /* Customer.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -351,17 +356,18 @@
 			files = (
 				80489B3F19649E9900362A45 /* ViewController.m in Sources */,
 				80143CB0196B10BE00B6CB88 /* PokerCard.m in Sources */,
+				1EA10D2B196DE59100367DE6 /* PlayingCard.m in Sources */,
 				80E4E0D119661FE200780922 /* AdminViewController.m in Sources */,
 				805975391964B6F50066DAF9 /* WelcomeViewController.m in Sources */,
-				80143CA7196B087400B6CB88 /* PlayingCard.m in Sources */,
 				80143CAD196B0EF900B6CB88 /* PokerPlayer.m in Sources */,
 				80143CA4196B061600B6CB88 /* NissanPokerModel.xcdatamodeld in Sources */,
 				8059753F1964B71E0066DAF9 /* QRScannerViewController.m in Sources */,
 				80143CB3196B10CD00B6CB88 /* PokerDeck.m in Sources */,
+				1EA10D28196DE49900367DE6 /* PlayingCard+WithInterface.m in Sources */,
 				8059753C1964B7080066DAF9 /* LogInViewController.m in Sources */,
+				1EA10D22196DBEE000367DE6 /* Customer.m in Sources */,
 				80489B3919649E9900362A45 /* AppDelegate.m in Sources */,
 				80489B3519649E9900362A45 /* main.m in Sources */,
-				80143CAA196B087500B6CB88 /* Customer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

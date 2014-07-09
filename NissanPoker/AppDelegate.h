@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "PokerPlayer.h"
+#import "Customer.h"
+#import "PokerCard.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,11 +19,18 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (strong, nonatomic) PokerPlayer *currentPlayer;
+@property (strong, nonatomic) PokerDeck *pokerDeck;
+
+//@property (strong, nonatomic) PokerPlayer *currentPlayer;
 
 
 + (AppDelegate *)sharedAppDelegate;
 
 - (NSURL *)applicationDocumentsDirectory;
+- (Customer *)getNewCustomer;
+- (void)saveContext;
+
+- (PokerCard *)dealCard;
+
 
 @end

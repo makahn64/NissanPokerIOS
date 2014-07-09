@@ -26,5 +26,7 @@
     #import <AudioToolbox/AudioToolbox.h>
     #import <CoreMedia/CoreMedia.h>
     #import "AppDelegate.h"
+    #import "Customer.h"
+    #import "PlayingCard.h"
 
 #endif
