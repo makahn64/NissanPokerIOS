@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Customer" representedClassName="Customer" syncable="YES">
+        <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pokerHand" optional="YES" toMany="YES" minCount="7" maxCount="7" deletionRule="Nullify" destinationEntity="PlayingCard" inverseName="myCustomer" inverseEntity="PlayingCard" syncable="YES"/>
+    </entity>
+    <entity name="PlayingCard" representedClassName="PlayingCard" syncable="YES">
+        <attribute name="rank" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="suit" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="myCustomer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Customer" inverseName="pokerHand" inverseEntity="Customer" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Customer" positionX="-297" positionY="5" width="128" height="103"/>
+        <element name="PlayingCard" positionX="-54" positionY="18" width="128" height="88"/>
+    </elements>
+</model>

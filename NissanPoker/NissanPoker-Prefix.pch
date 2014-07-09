@@ -13,4 +13,18 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
+    //#import <Security/Security.h>
+    //#import <AFNetworking/AFNetworking.h>
+    //#import <SSDataKit/SSDataKit.h>
+    //#import <SSToolkit/SSToolkit.h>
+    #import <SVProgressHUD/SVProgressHUD.h>
+    #import <MediaPlayer/MediaPlayer.h>
+    #import <AVFoundation/AVFoundation.h>
+    #import <AudioToolbox/AudioToolbox.h>
+    #import <CoreMedia/CoreMedia.h>
+    #import "AppDelegate.h"
+
 #endif
