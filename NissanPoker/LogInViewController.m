@@ -7,7 +7,7 @@
 //
 
 #import "LogInViewController.h"
-#import "QRScannerViewController.h"
+#import "ScannerViewController.h"
 
 #define FIRST_NAME_TEXT_FIELD 100
 #define LAST_NAME_TEXT_FIELD 101
@@ -15,7 +15,7 @@
 
 @interface LogInViewController ()
 
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *loginTapRecognizer;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *adminPanelTapRecognizer;
 
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
@@ -48,11 +48,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self.firstNameField setDelegate:self];
     [self.lastNameField setDelegate:self];
     [self.emailField setDelegate:self];
-    [self.loginTapRecognizer setNumberOfTouchesRequired:3];
-    [self.loginTapRecognizer setNumberOfTapsRequired:3];
+    
+    [self.adminPanelTapRecognizer setNumberOfTouchesRequired:1];
+    [self.adminPanelTapRecognizer setNumberOfTapsRequired:3];
     
 }
 
@@ -236,16 +238,20 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    AppDelegate *appD = [AppDelegate sharedAppDelegate];
     
-    Customer *c = [appD getNewCustomer];
-    c.firstName = self.firstNameField.text;
-    c.lastName = self.lastNameField.text;
-    c.emailAddress = self.emailField.text;
-    [appD saveContext];
-    
-    QRScannerViewController *qvc = (QRScannerViewController *)[segue destinationViewController];
-    qvc.customer = c;
+    if ( [[segue destinationViewController] isKindOfClass:[ScannerViewController class]] )
+    {
+        AppDelegate *appD = [AppDelegate sharedAppDelegate];
+        
+        Customer *c = [appD getNewCustomer];
+        c.firstName = self.firstNameField.text;
+        c.lastName = self.lastNameField.text;
+        c.emailAddress = self.emailField.text;
+        [appD saveContext];
+        
+        ScannerViewController *qvc = (ScannerViewController *)[segue destinationViewController];
+        qvc.customer = c;
+    }
     
 }
 

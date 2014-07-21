@@ -17,6 +17,5 @@
 - (PokerCard *)drawCardRandomly;  //Draws from a random index
 
 - (NSArray *)asArrayOfNumbers;
-+ (PokerDeck *)newFromArrayOfNumbers;
 
 @end

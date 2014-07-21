@@ -7,14 +7,16 @@
 //
 
 #import "AdminViewController.h"
+#import "PlayingCardView.h"
+#import "PokerCard.h"
 
 @interface AdminViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *savedHandLabel;
-
 @end
 
+
 @implementation AdminViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,13 +27,11 @@
     return self;
 }
 
+#pragma mark - Life Cycle Methods
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSArray *savedHand = [[NSUserDefaults standardUserDefaults] objectForKey:@"Final Hand"];
-    
-    self.savedHandLabel.text = [savedHand componentsJoinedByString:@""];
     
 }
 
@@ -40,6 +40,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - Actions
 
 - (IBAction)exitButtonTapped:(id)sender {
     

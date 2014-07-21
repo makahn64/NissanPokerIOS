@@ -107,6 +107,14 @@
     
 }
 
+#pragma mark - Suit as Unicode Getter
+
+- (NSString *)suitAsCharacter
+{
+    NSArray *unicodeSuits = @[@" ?" ,@"♣",@"♦", @"♥", @"♠"];
+    return unicodeSuits[[self suitNumeric]];
+}
+
 
 #pragma mark - Card Utilities
 

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QRScannerViewController : UIViewController <UIAlertViewDelegate, AVCaptureMetadataOutputObjectsDelegate>
+@interface ScannerViewController : UIViewController <UIAlertViewDelegate, AVCaptureMetadataOutputObjectsDelegate, UICollectionViewDataSource>
 
+@property (strong, nonatomic) NSMutableArray *currentHand;
 @property (nonatomic, strong) Customer *customer;
 
 + (NSArray *)getValidQRTargetValues;

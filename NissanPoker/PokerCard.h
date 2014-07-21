@@ -16,12 +16,14 @@
 
 - (void)setRankNumeric: (int)rank;
 - (void)setSuitNumeric: (int)suit;
--(int)suitNumeric;
--(int)rankNumeric;
--(int)cardNumeric;
+- (int)suitNumeric;
+- (int)rankNumeric;
+- (int)cardNumeric;
 
 - (BOOL)isFaceCard;
 - (BOOL)isJoker;
+
+- (NSString *)suitAsCharacter;
 
 + (int)maxSuitIndex;
 + (int)minSuitIndex;

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "80489B2419649E9900362A45"
-               BuildableName = "NissanPoker.app"
-               BlueprintName = "NissanPoker"
-               ReferencedContainer = "container:NissanPoker.xcodeproj">
+               BuildableName = "Nissan Poker.app"
+               BlueprintName = "Nissan Poker"
+               ReferencedContainer = "container:Nissan Poker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "80489B4519649E9900362A45"
-               BuildableName = "NissanPokerTests.xctest"
-               BlueprintName = "NissanPokerTests"
-               ReferencedContainer = "container:NissanPoker.xcodeproj">
+               BuildableName = "Nissan PokerTests.xctest"
+               BlueprintName = "Nissan PokerTests"
+               ReferencedContainer = "container:Nissan Poker.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "80489B2419649E9900362A45"
-            BuildableName = "NissanPoker.app"
-            BlueprintName = "NissanPoker"
-            ReferencedContainer = "container:NissanPoker.xcodeproj">
+            BuildableName = "Nissan Poker.app"
+            BlueprintName = "Nissan Poker"
+            ReferencedContainer = "container:Nissan Poker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "80489B2419649E9900362A45"
-            BuildableName = "NissanPoker.app"
-            BlueprintName = "NissanPoker"
-            ReferencedContainer = "container:NissanPoker.xcodeproj">
+            BuildableName = "Nissan Poker.app"
+            BlueprintName = "Nissan Poker"
+            ReferencedContainer = "container:Nissan Poker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "80489B2419649E9900362A45"
-            BuildableName = "NissanPoker.app"
-            BlueprintName = "NissanPoker"
-            ReferencedContainer = "container:NissanPoker.xcodeproj">
+            BuildableName = "Nissan Poker.app"
+            BlueprintName = "Nissan Poker"
+            ReferencedContainer = "container:Nissan Poker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
