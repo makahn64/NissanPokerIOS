@@ -73,7 +73,7 @@
     
     for (NSUInteger i = 0; i < deckSize; i++)
     {
-        NSInteger remainingCount = deckSize - i;
+        int remainingCount = (int) (deckSize - i);
         NSInteger exchangeIndex = i + arc4random_uniform(remainingCount);
         [self.deck exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
     }
@@ -103,15 +103,15 @@
 
 - (PokerCard *)drawCard;
 {
-    PokerCard *card = [self.deck objectAtIndex:(1)];
-    [self.deck removeObjectAtIndex:(1)];
+    PokerCard *card = [self.deck objectAtIndex:(0)];
+    [self.deck removeObjectAtIndex:(0)];
     return card;
 }
 
 
 - (PokerCard *)drawCardRandomly;
 {
-    NSUInteger randIndex = arc4random_uniform([self.deck count]+1);
+    NSUInteger randIndex = arc4random_uniform([self.deck count] + 1.0);
     PokerCard *card = [_deck objectAtIndex:(randIndex)];
     [self.deck removeObjectAtIndex:(randIndex)];
     return card;

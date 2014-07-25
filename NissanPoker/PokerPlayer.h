@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PokerDeck.h"
 #import "PokerCard.h"
+#import "PokerHand.h"
 
 @interface PokerPlayer : NSObject
 
@@ -19,7 +20,7 @@
 @property (nonatomic) NSInteger timeStartedGame;
 
 @property (strong, nonatomic) PokerDeck *deck;
-@property (strong, nonatomic) NSMutableArray *pokerHand;
+@property (strong, nonatomic) PokerHand *pokerHand;
 
 
 - (PokerCard *)getNewCard;

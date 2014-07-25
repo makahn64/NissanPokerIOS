@@ -14,7 +14,6 @@
 		80143CAD196B0EF900B6CB88 /* PokerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CAC196B0EF900B6CB88 /* PokerPlayer.m */; };
 		80143CB0196B10BE00B6CB88 /* PokerCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CAF196B10BE00B6CB88 /* PokerCard.m */; };
 		80143CB3196B10CD00B6CB88 /* PokerDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CB2196B10CD00B6CB88 /* PokerDeck.m */; };
-		801C7FA8197DA7F9009431B7 /* HandEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 801C7FA7197DA7F9009431B7 /* HandEvaluator.m */; };
 		801C7FAB197DA96D009431B7 /* PokerHand.m in Sources */ = {isa = PBXBuildFile; fileRef = 801C7FAA197DA96D009431B7 /* PokerHand.m */; };
 		8046A9DB197730E500232B96 /* SubmitHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8046A9DA197730E500232B96 /* SubmitHandViewController.m */; };
 		8046A9DE1978326D00232B96 /* CrossfadeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8046A9DD1978326D00232B96 /* CrossfadeSegue.m */; };
@@ -25,7 +24,6 @@
 		80489B3519649E9900362A45 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80489B3419649E9900362A45 /* main.m */; };
 		80489B3919649E9900362A45 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80489B3819649E9900362A45 /* AppDelegate.m */; };
 		80489B3C19649E9900362A45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80489B3A19649E9900362A45 /* Main.storyboard */; };
-		80489B4119649E9900362A45 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80489B4019649E9900362A45 /* Images.xcassets */; };
 		80489B4819649E9900362A45 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80489B4719649E9900362A45 /* XCTest.framework */; };
 		80489B4919649E9900362A45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80489B2819649E9900362A45 /* Foundation.framework */; };
 		80489B4A19649E9900362A45 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80489B2C19649E9900362A45 /* UIKit.framework */; };
@@ -34,6 +32,7 @@
 		805975391964B6F50066DAF9 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 805975381964B6F50066DAF9 /* WelcomeViewController.m */; };
 		8059753C1964B7080066DAF9 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059753B1964B7080066DAF9 /* LogInViewController.m */; };
 		8059753F1964B71E0066DAF9 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059753E1964B71E0066DAF9 /* ScannerViewController.m */; };
+		808D4BFB1982F092002A0268 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 808D4BFA1982F092002A0268 /* Images.xcassets */; };
 		80C6E83A196F14FB0007BEA2 /* PlayingCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C6E839196F14FB0007BEA2 /* PlayingCardView.m */; };
 		80E4E0D119661FE200780922 /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E4E0D019661FE200780922 /* AdminViewController.m */; };
 		BADD0FC1BD8E4F58A82D9CB9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0495A8A1584BB58D427942 /* libPods.a */; };
@@ -63,8 +62,6 @@
 		80143CAF196B10BE00B6CB88 /* PokerCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerCard.m; sourceTree = "<group>"; };
 		80143CB1196B10CD00B6CB88 /* PokerDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerDeck.h; sourceTree = "<group>"; };
 		80143CB2196B10CD00B6CB88 /* PokerDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerDeck.m; sourceTree = "<group>"; };
-		801C7FA6197DA7F9009431B7 /* HandEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandEvaluator.h; sourceTree = "<group>"; };
-		801C7FA7197DA7F9009431B7 /* HandEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandEvaluator.m; sourceTree = "<group>"; };
 		801C7FA9197DA96D009431B7 /* PokerHand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerHand.h; sourceTree = "<group>"; };
 		801C7FAA197DA96D009431B7 /* PokerHand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerHand.m; sourceTree = "<group>"; };
 		8046A9D9197730E500232B96 /* SubmitHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitHandViewController.h; sourceTree = "<group>"; };
@@ -82,7 +79,6 @@
 		80489B3719649E9900362A45 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		80489B3819649E9900362A45 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		80489B3B19649E9900362A45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		80489B4019649E9900362A45 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		80489B4619649E9900362A45 /* Nissan PokerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nissan PokerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80489B4719649E9900362A45 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		80489B4F19649E9900362A45 /* Nissan PokerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Nissan PokerTests-Info.plist"; sourceTree = "<group>"; };
@@ -94,6 +90,7 @@
 		8059753B1964B7080066DAF9 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		8059753D1964B71E0066DAF9 /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
 		8059753E1964B71E0066DAF9 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
+		808D4BFA1982F092002A0268 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = /Volumes/shared/Images.xcassets; sourceTree = "<absolute>"; };
 		80C6E838196F14FB0007BEA2 /* PlayingCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardView.h; sourceTree = "<group>"; };
 		80C6E839196F14FB0007BEA2 /* PlayingCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardView.m; sourceTree = "<group>"; };
 		80E4E0CF19661FE200780922 /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
@@ -198,13 +195,11 @@
 				80143CAF196B10BE00B6CB88 /* PokerCard.m */,
 				80143CB1196B10CD00B6CB88 /* PokerDeck.h */,
 				80143CB2196B10CD00B6CB88 /* PokerDeck.m */,
-				801C7FA6197DA7F9009431B7 /* HandEvaluator.h */,
-				801C7FA7197DA7F9009431B7 /* HandEvaluator.m */,
 				801C7FA9197DA96D009431B7 /* PokerHand.h */,
 				801C7FAA197DA96D009431B7 /* PokerHand.m */,
 				8059753A1964B7080066DAF9 /* LogInViewController.h */,
 				8059753B1964B7080066DAF9 /* LogInViewController.m */,
-				80489B4019649E9900362A45 /* Images.xcassets */,
+				808D4BFA1982F092002A0268 /* Images.xcassets */,
 				80489B2F19649E9900362A45 /* Supporting Files */,
 			);
 			path = NissanPoker;
@@ -320,7 +315,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80489B4119649E9900362A45 /* Images.xcassets in Resources */,
+				808D4BFB1982F092002A0268 /* Images.xcassets in Resources */,
 				80489B3319649E9900362A45 /* InfoPlist.strings in Resources */,
 				80489B3C19649E9900362A45 /* Main.storyboard in Resources */,
 			);
@@ -391,7 +386,6 @@
 				80489B3919649E9900362A45 /* AppDelegate.m in Sources */,
 				8046A9DE1978326D00232B96 /* CrossfadeSegue.m in Sources */,
 				80489B3519649E9900362A45 /* main.m in Sources */,
-				801C7FA8197DA7F9009431B7 /* HandEvaluator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,20 +8,23 @@
 
 #import "SubmitHandViewController.h"
 #import "PlayingCardView.h"
+#import "PokerHand.h"
 
 #define FIRST_NAME_FIELD 200
 #define LAST_NAME_FIELD 201
 
 @interface SubmitHandViewController ()
 
+@property (strong, nonatomic) NSMutableArray *handCardViews;
+@property (strong, nonatomic) NSArray *finalHand;
+
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *finalHandCollectionView;
 
+@property (weak, nonatomic) IBOutlet UILabel *handDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
-
-@property (strong, nonatomic) NSMutableArray *finalHand;
 
 @property (nonatomic) BOOL hasName;
 
@@ -49,7 +52,21 @@
     
     self.hasName = NO;
     
-    self.finalHand = [self getFinalHand];
+    self.finalHand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.bestFiveCardHand;
+    
+    self.handDescriptionLabel.text = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.handDescription;
+    
+    self.handCardViews = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [self.finalHand count]; i++)
+    {
+        CGRect newCardFrame = CGRectMake(0, 0, 70, 98);
+        PlayingCardView *newCard = [[PlayingCardView alloc] initWithFrame:newCardFrame];
+        [newCard setRankAndSuitFromCard:self.finalHand[i]];
+        [newCard flipCard];
+        
+        [self.handCardViews addObject:newCard];
+    }
     
     [self.finalHandCollectionView reloadData];
     
@@ -61,18 +78,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - CollectionView Data Source Methods
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.finalHand count];
+    return [self.handCardViews count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"playingCardCell" forIndexPath:indexPath];
     
-    PlayingCardView *cardView = self.finalHand[indexPath.row];
+    PlayingCardView *cardView = self.handCardViews[indexPath.row];
     [cell addSubview:cardView];
     
     return cell;
@@ -140,22 +159,6 @@
     
     return YES;
 }
-
-#pragma mark - Utilities
-
-- (NSMutableArray *)getFinalHand
-{
-    //Do hand evaluation here
-    
-    NSMutableArray *fiveCardHand = [[NSMutableArray alloc] initWithCapacity:5];
-    
-    for (int i = 0; i < 5; i++)
-    {
-        [fiveCardHand addObject:self.currentHand[i]];
-    }
-    return fiveCardHand;
-}
-
 
 #pragma mark - Navigation
 

@@ -23,7 +23,7 @@
         self.timeStartedGame = (int) timeStartedDecimal;
         
         self.deck = [[PokerDeck alloc] init];
-        self.pokerHand = [[NSMutableArray alloc] init];
+        self.pokerHand = [[PokerHand alloc] init];
     }
     
     return self;
@@ -34,7 +34,7 @@
 {
     PokerCard *newCard = self.deck.drawCard;
     
-    [self.pokerHand addObject: newCard];
+    [self.pokerHand addCard:newCard];
     return newCard;
 }
 

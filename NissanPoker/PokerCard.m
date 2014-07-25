@@ -10,6 +10,27 @@
 
 @implementation PokerCard
 
+#pragma mark - Initializer
+
+- (instancetype)initWithRank:(NSString *)rank andSuit:(NSString *)suit
+{
+    self = [super init];
+    if (self) {
+        [self setRank:rank];
+        [self setSuit:suit];
+    }
+    return self;
+}
+
+- (instancetype)initWithRankNumeric:(int)rank andSuitNumeric:(int)suit
+{
+    self = [super init];
+    if (self) {
+        [self setRankNumeric:rank];
+        [self setSuitNumeric:suit];
+    }
+    return self;
+}
 
 #pragma mark - Rank & Suit Valid Values
 
@@ -23,24 +44,6 @@
     return @[@" ?" ,@"Clubs",@"Diamonds", @"Hearts", @"Spades"];
 }
 
-#pragma mark - Numeric Getters
-
--(int)suitNumeric{
-    
-    return [[PokerCard validSuits] indexOfObject:self.suit];
-}
-
-
--(int)rankNumeric{
-    return [[PokerCard validRanks] indexOfObject:self.rank];
-
-}
-
--(int)cardNumeric{
-    
-    return [self suitNumeric] << 16 | [self rankNumeric];
-}
-
 #pragma mark - Rank & Suit Setters
 
 
@@ -49,10 +52,12 @@
     if ([[PokerCard validRanks] containsObject:(rank)])
     {
         _rank = rank;
+        self.rankNumeric = (int) [[PokerCard validRanks] indexOfObject:self.rank];
     }
     else
     {
         _rank = [[PokerCard validRanks] objectAtIndex:(0)];
+        self.rankNumeric = 0;
     }
     
     [self updateRankSuit];
@@ -65,10 +70,12 @@
     if ([[PokerCard validSuits] containsObject:(suit)])
     {
         _suit = suit;
+        self.suitNumeric = (int)[[PokerCard validSuits] indexOfObject:suit];
     }
     else
     {
         _suit = [[PokerCard validSuits] objectAtIndex:(0)];
+        self.suitNumeric = 0;
     }
     
     [self updateRankSuit];
@@ -81,10 +88,12 @@
     if (rank < [[PokerCard validRanks] count] && rank > 0)
     {
         _rank = [[PokerCard validRanks] objectAtIndex:(rank)];
+        _rankNumeric = rank;
     }
     else
     {
         _rank = [[PokerCard validRanks] objectAtIndex:(0)];
+        _rankNumeric = 0;
     }
     
     [self updateRankSuit];
@@ -97,33 +106,50 @@
     if (suit < [[PokerCard validSuits] count] && suit > 0)
     {
         _suit = [[PokerCard validSuits] objectAtIndex:(suit)];
+        _suitNumeric = suit;
     }
     else
     {
         _suit = [[PokerCard validSuits] objectAtIndex:(0)];
+        _suitNumeric = 0;
     }
     
     [self updateRankSuit];
     
 }
 
-#pragma mark - Suit as Unicode Getter
+#pragma mark - Special String Getters
 
-- (NSString *)suitAsCharacter
+- (NSString *)suitAsUnicodeCharacter
 {
-    NSArray *unicodeSuits = @[@" ?" ,@"♣",@"♦", @"♥", @"♠"];
-    return unicodeSuits[[self suitNumeric]];
+    NSArray *unicodeSuits = @[@"?" ,@"♣",@"♦", @"♥", @"♠"];
+    return unicodeSuits[self.suitNumeric];
 }
 
+- (NSString *)suitAsInitial
+{
+    NSArray *suitInitials = @[@"?" ,@"c",@"d", @"h", @"s"];
+    return suitInitials[self.suitNumeric];
+}
+
+- (NSString *)rankAsInitial
+{
+    NSArray *rankInitials = @[@"?",@"A",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"T",@"J",@"Q",@"K",@"A",@"JO"];
+    return rankInitials[self.rankNumeric];
+}
+
+- (NSString *)rankName
+{
+    NSArray *rankNames = @[@"?",@"Ace",@"Two",@"Three",@"Four",@"Five",@"Six",@"Seven",@"Eight",@"Nine",@"Ten",@"Jack",@"Queen",@"King",@"Ace",@"Joker"];
+    return rankNames[self.rankNumeric];
+}
 
 #pragma mark - Card Utilities
 
 
 - (BOOL)isFaceCard;
 {
-    int rankValue = [[PokerCard validRanks] indexOfObject:(_rank)];
-    
-    if (rankValue >= 11 && rankValue <= 13)
+    if (self.rankNumeric >= 11 && self.rankNumeric <= 13)
     {
         return YES;
     }
@@ -136,7 +162,7 @@
 
 - (BOOL)isJoker;
 {
-    if (_rank == [[PokerCard validRanks] objectAtIndex:(15)])
+    if (self.rankNumeric == 15)
     {
         return YES;
     }
@@ -150,7 +176,7 @@
 //Returns the highest numerical value in the validSuits array corresponding to a standard suit.
 + (int)maxSuitIndex;
 {
-    return [[PokerCard validSuits] count] - 1;
+    return (int)[[PokerCard validSuits] count] - 1;
 }
 
 //Returns the lowest numerical value in the validSuits array corresponding to a standard suit (no error suit).
@@ -185,15 +211,12 @@
     }
 }
 
-
-#pragma mark - Private Utilities
-
-- (void)updateRankSuit
+- (int)cardNumeric
 {
-    if (self.rank && self.suit)
-    {
-        _rankSuit = [_rank stringByAppendingString:(_suit)];
-    }
+    int cardNumeric = self.suitNumeric << 16;
+    cardNumeric = cardNumeric | self.rankNumeric;
+    
+    return cardNumeric;
 }
 
 +(PokerCard *)cardFromNumeric:(int)numericValue{
@@ -207,6 +230,16 @@
     
     return newCard;
     
+}
+
+#pragma mark - Private Utilities
+
+- (void)updateRankSuit
+{
+    if (self.rank && self.suit)
+    {
+        _rankSuit = [self.rankAsInitial stringByAppendingString:( [self suitAsUnicodeCharacter] )];
+    }
 }
 
 

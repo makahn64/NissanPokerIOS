@@ -10,26 +10,41 @@
 
 @interface PokerCard : NSObject
 
-@property (strong, nonatomic) NSString *rank;
-@property (strong, nonatomic) NSString *suit;
+@property (strong, nonatomic, setter = setRank:) NSString *rank;
+@property (nonatomic, setter = setRankNumeric:) int rankNumeric;
+
+@property (strong, nonatomic, setter = setSuit:) NSString *suit;
+@property (nonatomic, setter = setSuitNumeric:) int suitNumeric;
+
 @property (strong, nonatomic, readonly) NSString *rankSuit;
 
+
+- (instancetype)initWithRank:(NSString *)rank andSuit:(NSString *)suit;
+- (instancetype)initWithRankNumeric:(int)rank andSuitNumeric:(int)suit;
+
+
+- (void)setRank: (NSString*)rank;
+- (void)setSuit: (NSString*)suit;
 - (void)setRankNumeric: (int)rank;
 - (void)setSuitNumeric: (int)suit;
-- (int)suitNumeric;
-- (int)rankNumeric;
-- (int)cardNumeric;
+
+- (NSString *)suitAsUnicodeCharacter;
+- (NSString *)suitAsInitial;
+- (NSString *)rankAsInitial;
+- (NSString *)rankName;
 
 - (BOOL)isFaceCard;
 - (BOOL)isJoker;
 
-- (NSString *)suitAsCharacter;
++ (NSArray *)validRanks;
++ (NSArray *)validSuits;
 
 + (int)maxSuitIndex;
 + (int)minSuitIndex;
 + (int)minRankIndexAceLow: (BOOL)aceLow;
 + (int)maxRankIndexAceLow: (BOOL)aceLow;
 
+- (int)cardNumeric;
 +(PokerCard *)cardFromNumeric:(int)numericValue;
 
 @end

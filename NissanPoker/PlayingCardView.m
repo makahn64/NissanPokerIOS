@@ -262,7 +262,7 @@
 
 - (void)setRankAndSuitFromCard:(PokerCard *)card
 {
-    [self setRank:card.rank andSuit:card.suitAsCharacter];
+    [self setRank:card.rank andSuit:[card suitAsUnicodeCharacter]];
 }
 
 - (void)setRank:(NSString *)rank andSuit:(NSString *)suit

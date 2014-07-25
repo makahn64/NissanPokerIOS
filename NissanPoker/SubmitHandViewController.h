@@ -10,6 +10,4 @@
 
 @interface SubmitHandViewController : UIViewController <UICollectionViewDataSource, UITextFieldDelegate>
 
-@property (strong, nonatomic) NSMutableArray *currentHand;
-
 @end

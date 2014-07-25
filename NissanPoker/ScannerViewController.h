@@ -10,7 +10,8 @@
 
 @interface ScannerViewController : UIViewController <UIAlertViewDelegate, AVCaptureMetadataOutputObjectsDelegate, UICollectionViewDataSource>
 
-@property (strong, nonatomic) NSMutableArray *currentHand;
+@property (strong, nonatomic) NSMutableArray *handCardViews;
+@property (strong, nonatomic) NSMutableArray *hand;
 @property (nonatomic, strong) Customer *customer;
 
 + (NSArray *)getValidQRTargetValues;

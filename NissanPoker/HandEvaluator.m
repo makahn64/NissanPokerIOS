@@ -21,6 +21,24 @@
 
 @implementation HandEvaluator
 
+- (instancetype)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.sevenCardHand = [[NSMutableArray alloc] init];
+        
+        self.suitCounts = [[NSMutableArray alloc] init];
+        
+        self.rankCounts = [[NSMutableArray alloc] init];
+        
+    }
+    
+    return self;
+}
+
+
 - (void)addCard:(PokerCard *)newCard
 {
     [self.sevenCardHand addObject:newCard];
@@ -38,7 +56,14 @@
     PokerHand *finalHand = [[PokerHand alloc] init];
     
     
+    //Trillions place is the hand rank
+    //Each card is multiplied by 10^(2*i), where i is index from low to high.
     
+    for (PokerCard *card in self.sevenCardHand)
+    {
+        NSNumber *count = (NSNumber *) [self.rankCounts objectAtIndex:card.rankNumeric];
+        [self.rankCounts setOb]
+    }
     
     
     return finalHand;

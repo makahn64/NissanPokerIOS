@@ -10,13 +10,11 @@
 #import "SubmitHandViewController.h"
 #import "PlayingCard+WithInterface.h"
 #import "PlayingCardView.h"
+#import "PokerHand.h"
 
 #define UI_ALERTVIEW_QUIT 200
 
 @interface ScannerViewController ()
-
-//@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *adminPanelTapRecognizer;
-//@property (weak, nonatomic) IBOutlet UIImageView *nissanLogo;
 
 @property (weak, nonatomic) IBOutlet UIImageView *infoPopupView;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
@@ -69,17 +67,15 @@
 {
     [super viewDidLoad];
     
+    [AppDelegate sharedAppDelegate].currentPlayer = [[PokerPlayer alloc] init];
+    
+    self.hand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.hand;
+    
     [self setupCardViews];
     [self setupNewCustomer];
     [self setupVideoCaptureSession];
     [self setupPopupViews];
     
-    /*
-    [self.adminPanelTapRecognizer setNumberOfTouchesRequired:1];
-    [self.adminPanelTapRecognizer setNumberOfTapsRequired:1];
-    [self.adminPanelTapRecognizer setDelegate:self];
-    [self.nissanLogo addGestureRecognizer:self.adminPanelTapRecognizer];
-    */
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -98,14 +94,14 @@
 
 - (void)setupCardViews
 {
-    self.currentHand = [[NSMutableArray alloc] init];
+    self.handCardViews = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < 7; i++)
     {
         CGRect newCardFrame = CGRectMake(0, 0, 40, 56);
         PlayingCardView *newCard = [[PlayingCardView alloc] initWithFrame:newCardFrame];
         
-        [self.currentHand addObject:newCard];
+        [self.handCardViews addObject:newCard];
     }
     
     UICollectionViewFlowLayout *flow = (UICollectionViewFlowLayout*) self.currentHandCollectionView.collectionViewLayout;
@@ -196,14 +192,14 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.currentHand count];
+    return [self.handCardViews count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"playingCardCell" forIndexPath:indexPath];
     
-    PlayingCardView *cardView = self.currentHand[indexPath.row];
+    PlayingCardView *cardView = self.handCardViews[indexPath.row];
     //[cardView setFrame:cell.bounds];
     [cell addSubview:cardView];
     
@@ -218,7 +214,6 @@
     
     if (metadataObjects != nil && [metadataObjects count] > 0)
     {
-        //[self.captureSession stopRunning];
         
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         
@@ -247,8 +242,9 @@
     PokerCard *newCard = [[AppDelegate sharedAppDelegate] dealCard];
     [self.customer addPokerHandObject:[PlayingCard playingCardFromPokerCard:newCard]];
     
-    [self displayCard: newCard];
+    [[AppDelegate sharedAppDelegate] saveContext];
     
+    [self displayCard: newCard];
     
 }
 
@@ -299,8 +295,6 @@
                              }
              ];
             
-            //[self displayCodeScannedAlertView:baseCard];
-            
         }];
         
     }
@@ -309,7 +303,7 @@
 
 - (PlayingCardView *)getNextUnflippedCard
 {
-    for (PlayingCardView *card in self.currentHand)
+    for (PlayingCardView *card in self.handCardViews)
     {
         if (!card.isFaceup)
         {
@@ -320,36 +314,7 @@
     return nil;
     
 }
-/*
-- (void)displayCodeScannedAlertView:(PokerCard *)newCard
-{
-    if ([self.validQRTargetValues count] > 0)
-    {
-        UIAlertView *alertQRValue = [[UIAlertView alloc]
-                                     initWithTitle: @"You received a new card!"
-                                     message:@"Keep playing for a full hand."
-                                     delegate:self
-                                     cancelButtonTitle:@"Keep Playing"
-                                     otherButtonTitles:nil, nil];
-        [alertQRValue setTag: UI_ALERTVIEW_QR_SCANNED];
-        
-        [alertQRValue show];
-    }
-    else
-    {
-        UIAlertView *alertLastQRValue = [[UIAlertView alloc]
-                                         initWithTitle: @"You have a full hand!"
-                                         message:@"Congratualations! Your hand will be added to the scoreboard."
-                                         delegate:self
-                                         cancelButtonTitle:@"Finish Game"
-                                         otherButtonTitles:nil, nil];
-        [alertLastQRValue setTag: UI_ALERTVIEW_LAST_QR_SCANNED];
-        
-        [alertLastQRValue show];
-    }
 
-}
-*/
 - (IBAction)continueTapped:(id)sender {
     
     if ([self.validQRTargetValues count] > 0)
@@ -366,7 +331,7 @@
                              
                          }
          ];
-        [self.captureSession startRunning];
+        //[self.captureSession startRunning];
     }
     
     else
@@ -381,42 +346,22 @@
     
 }
 
+
 /*
-- (void)handleGesture
-{
-    [self performSegueWithIdentifier:@"adminPanelPush" sender:self];
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    
-    if (alertView.tag == UI_ALERTVIEW_QUIT && buttonIndex != alertView.cancelButtonIndex)
-    {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-    
-}
-*/
-
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    AppDelegate *appD = [AppDelegate sharedAppDelegate];
-    
-    Customer *c = [appD getNewCustomer];
-    //c.pokerHand = [NSSet setWithArray:self.currentHand];
-    [appD saveContext];
     
     if ( [[segue destinationViewController] isKindOfClass:[SubmitHandViewController class]] )
     {
         SubmitHandViewController *shvc = (SubmitHandViewController *)[segue destinationViewController];
-        shvc.currentHand = self.currentHand;
+        shvc.currentHandViews = self.currentHandViews;
+        shvc.currentHandCards = self.currentHandCards;
     }
     
 
 }
-
+*/
 
 @end

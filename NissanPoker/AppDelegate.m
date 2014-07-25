@@ -70,16 +70,16 @@
     newCustomer.currentPlayer = [NSNumber numberWithBool:YES];
     [self saveContext];
     
-    // Shuffle up an deal
-    
-    self.pokerDeck = [PokerDeck new];
+    // Shuffle up and deal
     
     return newCustomer;
 }
 
 - (PokerCard *)dealCard{
     
-    return [self.pokerDeck drawCard];
+    PokerCard *newCard = [self.currentPlayer getNewCard];
+    return newCard;
+    
 }
 
 -(void)saveContext{

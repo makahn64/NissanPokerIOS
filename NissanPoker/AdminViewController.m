@@ -9,8 +9,11 @@
 #import "AdminViewController.h"
 #import "PlayingCardView.h"
 #import "PokerCard.h"
+#import "PokerHand.h"
 
 @interface AdminViewController ()
+
+@property (strong, nonatomic) PokerHand *previousHand;
 
 @end
 
@@ -70,6 +73,27 @@
         }
         
     }
+}
+
+- (IBAction)testTapped:(id)sender {
+    
+    PokerDeck *testDeck = [[PokerDeck alloc] init];
+    
+    PokerHand *testHand = [[PokerHand alloc] init];
+
+    
+    for (int i = 0; i < 7; i++) {
+        //NSLog(@"Card #%d", i);
+        [testHand addCard:[testDeck drawCard]];
+    }
+    
+    if (self.previousHand) {
+        NSComparisonResult result = [testHand compareTo:self.previousHand];
+        NSLog(@"%ld",result);
+    }
+    
+    self.previousHand = testHand;
+    
 }
 
 /*
