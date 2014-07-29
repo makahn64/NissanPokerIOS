@@ -53,6 +53,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8x8-Cr-qYT"/>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="continueLabel" destination="O7E-cC-hvO" id="N50-0x-ayC"/>
                         <outlet property="tapGestureRecognizer" destination="BC0-fj-Q7g" id="TPU-Tz-Zhh"/>
@@ -343,7 +344,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DNk-dG-AyG" userLabel="Continue Button">
-                                        <rect key="frame" x="30" y="666" width="337" height="42"/>
+                                        <rect key="frame" x="54" y="666" width="288" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="continueButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -397,7 +398,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kph-OZ-zFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer numberOfTapsRequired="3" numberOfTouchesRequired="2" id="lfw-X1-xEh">
+                <tapGestureRecognizer numberOfTapsRequired="3" id="lfw-X1-xEh">
                     <connections>
                         <segue destination="7sw-ed-6pr" kind="push" id="9Cs-mq-yC2"/>
                     </connections>
@@ -433,7 +434,7 @@
                                         </state>
                                         <state key="selected" image="submitButtonSelected"/>
                                         <connections>
-                                            <segue destination="at3-G8-fHA" kind="push" id="1vb-MO-SbE"/>
+                                            <action selector="userSubmitted:" destination="iV7-jI-fv1" eventType="touchUpInside" id="lj9-Ou-Llh"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="w16-iU-tFS">
@@ -527,6 +528,7 @@
                         <outlet property="handDescriptionLabel" destination="KcC-99-CXH" id="sPu-ei-m4a"/>
                         <outlet property="lastNameTextField" destination="E74-Pj-bjT" id="jdG-29-646"/>
                         <outlet property="submitButton" destination="9Pu-Te-BSV" id="CgH-YV-jHy"/>
+                        <segue destination="at3-G8-fHA" kind="push" id="rDM-27-mwU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="si4-zB-I2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -555,6 +557,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1vb-MO-SbE"/>
+        <segue reference="rDM-27-mwU"/>
     </inferredMetricsTieBreakers>
 </document>

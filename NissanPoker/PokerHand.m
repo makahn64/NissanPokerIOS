@@ -579,6 +579,22 @@
     
     return handString;
 }
+
+- (NSString *)bestHandAsStringInitials
+{
+    NSString *handString = @"[";
+    
+    for (PokerCard *card in self.bestFiveCardHand) {
+        NSString *cardRS = [card.rankAsInitial stringByAppendingString:card.suitAsInitial];
+        NSString *nextStr = [cardRS stringByAppendingString:@", "];
+        handString = [handString stringByAppendingString:nextStr];
+    }
+    
+    handString = [handString substringToIndex:handString.length - 2];
+    handString = [handString stringByAppendingString:@"]"];
+    
+    return handString;
+}
     
 
 @end

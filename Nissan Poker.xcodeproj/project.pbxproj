@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1EA10D22196DBEE000367DE6 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA10D21196DBEE000367DE6 /* Customer.m */; };
 		1EA10D28196DE49900367DE6 /* PlayingCard+WithInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA10D27196DE49900367DE6 /* PlayingCard+WithInterface.m */; };
 		1EA10D2B196DE59100367DE6 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA10D2A196DE59100367DE6 /* PlayingCard.m */; };
 		80143CA4196B061600B6CB88 /* NissanPokerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80143CA2196B061600B6CB88 /* NissanPokerModel.xcdatamodeld */; };
@@ -32,7 +31,8 @@
 		805975391964B6F50066DAF9 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 805975381964B6F50066DAF9 /* WelcomeViewController.m */; };
 		8059753C1964B7080066DAF9 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059753B1964B7080066DAF9 /* LogInViewController.m */; };
 		8059753F1964B71E0066DAF9 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059753E1964B71E0066DAF9 /* ScannerViewController.m */; };
-		808D4BFB1982F092002A0268 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 808D4BFA1982F092002A0268 /* Images.xcassets */; };
+		808D4CC419881561002A0268 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 808D4CC319881561002A0268 /* Images.xcassets */; };
+		808D4CCA19881855002A0268 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 808D4CC919881855002A0268 /* Customer.m */; };
 		80C6E83A196F14FB0007BEA2 /* PlayingCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C6E839196F14FB0007BEA2 /* PlayingCardView.m */; };
 		80E4E0D119661FE200780922 /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E4E0D019661FE200780922 /* AdminViewController.m */; };
 		BADD0FC1BD8E4F58A82D9CB9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0495A8A1584BB58D427942 /* libPods.a */; };
@@ -49,8 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1EA10D20196DBEE000367DE6 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Customer.h; path = NissanPoker/Customer.h; sourceTree = "<group>"; };
-		1EA10D21196DBEE000367DE6 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Customer.m; path = NissanPoker/Customer.m; sourceTree = "<group>"; };
 		1EA10D26196DE49900367DE6 /* PlayingCard+WithInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlayingCard+WithInterface.h"; sourceTree = "<group>"; };
 		1EA10D27196DE49900367DE6 /* PlayingCard+WithInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PlayingCard+WithInterface.m"; sourceTree = "<group>"; };
 		1EA10D29196DE59100367DE6 /* PlayingCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingCard.h; path = NissanPoker/PlayingCard.h; sourceTree = "<group>"; };
@@ -90,7 +88,9 @@
 		8059753B1964B7080066DAF9 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		8059753D1964B71E0066DAF9 /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
 		8059753E1964B71E0066DAF9 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
-		808D4BFA1982F092002A0268 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = /Volumes/shared/Images.xcassets; sourceTree = "<absolute>"; };
+		808D4CC319881561002A0268 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		808D4CC819881855002A0268 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Customer.h; path = NissanPoker/Customer.h; sourceTree = "<group>"; };
+		808D4CC919881855002A0268 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Customer.m; path = NissanPoker/Customer.m; sourceTree = "<group>"; };
 		80C6E838196F14FB0007BEA2 /* PlayingCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardView.h; sourceTree = "<group>"; };
 		80C6E839196F14FB0007BEA2 /* PlayingCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardView.m; sourceTree = "<group>"; };
 		80E4E0CF19661FE200780922 /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
@@ -127,13 +127,13 @@
 		80143CA1196B05FA00B6CB88 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				80143CA2196B061600B6CB88 /* NissanPokerModel.xcdatamodeld */,
+				808D4CC819881855002A0268 /* Customer.h */,
+				808D4CC919881855002A0268 /* Customer.m */,
 				1EA10D29196DE59100367DE6 /* PlayingCard.h */,
 				1EA10D2A196DE59100367DE6 /* PlayingCard.m */,
-				80143CA2196B061600B6CB88 /* NissanPokerModel.xcdatamodeld */,
 				1EA10D26196DE49900367DE6 /* PlayingCard+WithInterface.h */,
 				1EA10D27196DE49900367DE6 /* PlayingCard+WithInterface.m */,
-				1EA10D20196DBEE000367DE6 /* Customer.h */,
-				1EA10D21196DBEE000367DE6 /* Customer.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 				801C7FAA197DA96D009431B7 /* PokerHand.m */,
 				8059753A1964B7080066DAF9 /* LogInViewController.h */,
 				8059753B1964B7080066DAF9 /* LogInViewController.m */,
-				808D4BFA1982F092002A0268 /* Images.xcassets */,
+				808D4CC319881561002A0268 /* Images.xcassets */,
 				80489B2F19649E9900362A45 /* Supporting Files */,
 			);
 			path = NissanPoker;
@@ -315,7 +315,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				808D4BFB1982F092002A0268 /* Images.xcassets in Resources */,
+				808D4CC419881561002A0268 /* Images.xcassets in Resources */,
 				80489B3319649E9900362A45 /* InfoPlist.strings in Resources */,
 				80489B3C19649E9900362A45 /* Main.storyboard in Resources */,
 			);
@@ -373,6 +373,7 @@
 				1EA10D2B196DE59100367DE6 /* PlayingCard.m in Sources */,
 				80E4E0D119661FE200780922 /* AdminViewController.m in Sources */,
 				80C6E83A196F14FB0007BEA2 /* PlayingCardView.m in Sources */,
+				808D4CCA19881855002A0268 /* Customer.m in Sources */,
 				801C7FAB197DA96D009431B7 /* PokerHand.m in Sources */,
 				805975391964B6F50066DAF9 /* WelcomeViewController.m in Sources */,
 				80143CAD196B0EF900B6CB88 /* PokerPlayer.m in Sources */,
@@ -382,7 +383,6 @@
 				1EA10D28196DE49900367DE6 /* PlayingCard+WithInterface.m in Sources */,
 				8046A9DB197730E500232B96 /* SubmitHandViewController.m in Sources */,
 				8059753C1964B7080066DAF9 /* LogInViewController.m in Sources */,
-				1EA10D22196DBEE000367DE6 /* Customer.m in Sources */,
 				80489B3919649E9900362A45 /* AppDelegate.m in Sources */,
 				8046A9DE1978326D00232B96 /* CrossfadeSegue.m in Sources */,
 				80489B3519649E9900362A45 /* main.m in Sources */,

@@ -243,7 +243,7 @@
     {
         AppDelegate *appD = [AppDelegate sharedAppDelegate];
         
-        Customer *c = [appD getNewCustomer];
+        Customer *c = [appD addCurentCustomerToCoreData];
         c.firstName = self.firstNameField.text;
         c.lastName = self.lastNameField.text;
         c.emailAddress = self.emailField.text;

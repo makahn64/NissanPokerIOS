@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "submitBackground.png"
+      "filename" : "submitButtonSelected.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "submitBackground@2x.png"
+      "filename" : "submitButtonSelected@2x.png"
     }
   ],
   "info" : {

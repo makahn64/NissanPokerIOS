@@ -23,8 +23,11 @@
 - (void)addCards:(NSArray *)newCards;
 - (void)addCardWithRank:(NSString *)rank andSuit:(NSString *)suit;
 
+- (NSMutableArray *)handShuffled;
+
 - (NSString *)fullHandAsString;
 - (NSString *)bestHandAsString;
+- (NSString *)bestHandAsStringInitials;
 
 typedef enum {
     Nothing = 0,

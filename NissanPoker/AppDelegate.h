@@ -26,7 +26,7 @@
 + (AppDelegate *)sharedAppDelegate;
 
 - (NSURL *)applicationDocumentsDirectory;
-- (Customer *)getNewCustomer;
+- (void)addCurentCustomerToCoreDataFinished:(BOOL)finishedGame;
 - (void)saveContext;
 
 - (PokerCard *)dealCard;

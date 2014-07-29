@@ -9,6 +9,8 @@
 #import "SubmitHandViewController.h"
 #import "PlayingCardView.h"
 #import "PokerHand.h"
+#import "PlayingCard+WithInterface.h"
+#import <AFNetworking/AFNetworking.h>
 
 #define FIRST_NAME_FIELD 200
 #define LAST_NAME_FIELD 201
@@ -16,7 +18,8 @@
 @interface SubmitHandViewController ()
 
 @property (strong, nonatomic) NSMutableArray *handCardViews;
-@property (strong, nonatomic) NSArray *finalHand;
+@property (strong, nonatomic) NSArray *bestHandArray;
+@property (strong, nonatomic) PokerHand *finalPokerHand;
 
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
@@ -52,17 +55,18 @@
     
     self.hasName = NO;
     
-    self.finalHand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.bestFiveCardHand;
+    self.finalPokerHand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand;
+    self.bestHandArray = self.finalPokerHand.bestFiveCardHand;
     
     self.handDescriptionLabel.text = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.handDescription;
     
     self.handCardViews = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < [self.finalHand count]; i++)
+    for (int i = 0; i < [self.bestHandArray count]; i++)
     {
         CGRect newCardFrame = CGRectMake(0, 0, 70, 98);
         PlayingCardView *newCard = [[PlayingCardView alloc] initWithFrame:newCardFrame];
-        [newCard setRankAndSuitFromCard:self.finalHand[i]];
+        [newCard setRankAndSuitFromCard:self.bestHandArray[i]];
         [newCard flipCard];
         
         [self.handCardViews addObject:newCard];
@@ -160,19 +164,44 @@
     return YES;
 }
 
+- (IBAction)userSubmitted:(id)sender
+{
+    AppDelegate *ad = [AppDelegate sharedAppDelegate];
+    ad.currentPlayer.firstName = self.firstNameTextField.text;
+    ad.currentPlayer.lastName = self.lastNameTextField.text;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *params = @{@"First Name": self.firstNameTextField.text,
+                             @"Last Name": self.lastNameTextField.text,
+                             @"Hand": [self.finalPokerHand bestHandAsStringInitials],
+                             @"Hand Value": [NSNumber numberWithInt: self.finalPokerHand.handValue]};
+    
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    
+    [manager POST:@"http://localhost/phptest/postbarf.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"Succeeded"];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [SVProgressHUD showErrorWithStatus:@"Failed"];
+        [[AppDelegate sharedAppDelegate] addCurentCustomerToCoreDataFinished:YES];
+    }];
+    
+}
+
+/*
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    AppDelegate *appD = [AppDelegate sharedAppDelegate];
     
-    Customer *c = [appD getNewCustomer];
-    c.firstName = self.firstNameTextField.text;
-    c.lastName = self.lastNameTextField.text;
-    //c.pokerHand = [NSSet setWithArray:self.finalHand];
-    [appD saveContext];
     
 }
-
+*/
 
 @end
