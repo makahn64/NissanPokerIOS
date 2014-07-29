@@ -69,10 +69,7 @@
     
     [AppDelegate sharedAppDelegate].currentPlayer = [[PokerPlayer alloc] init];
     
-    self.hand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.hand;
-    
     [self setupCardViews];
-    [self setupNewCustomer];
     [self setupVideoCaptureSession];
     [self setupPopupViews];
     
@@ -108,19 +105,6 @@
     flow.minimumInteritemSpacing = 2;
     
     [self.currentHandCollectionView reloadData];
-}
-
-- (void)setupNewCustomer
-{
-    AppDelegate *appD = [AppDelegate sharedAppDelegate];
-    
-    Customer *c = [appD getNewCustomer];
-    c.firstName = @"NewCustomer";
-    c.lastName = @"Unassigned";
-    c.emailAddress = @"test@appdelegates.com";
-    [appD saveContext];
-    
-    self.customer = c;
 }
 
 - (void)setupVideoCaptureSession
@@ -240,9 +224,6 @@
 {
     
     PokerCard *newCard = [[AppDelegate sharedAppDelegate] dealCard];
-    [self.customer addPokerHandObject:[PlayingCard playingCardFromPokerCard:newCard]];
-    
-    [[AppDelegate sharedAppDelegate] saveContext];
     
     [self displayCard: newCard];
     
@@ -336,11 +317,6 @@
     
     else
     {
-        AppDelegate *appD = [AppDelegate sharedAppDelegate];
-        
-        Customer *c = [appD getNewCustomer];
-        //c.pokerHand = [NSSet setWithArray:self.currentHand];
-        [appD saveContext];
         [self performSegueWithIdentifier:@"submitScreenSegue" sender:self];
     }
     
@@ -353,14 +329,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ( [[segue destinationViewController] isKindOfClass:[SubmitHandViewController class]] )
-    {
-        SubmitHandViewController *shvc = (SubmitHandViewController *)[segue destinationViewController];
-        shvc.currentHandViews = self.currentHandViews;
-        shvc.currentHandCards = self.currentHandCards;
-    }
-    
-
 }
 */
 

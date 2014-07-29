@@ -17,8 +17,8 @@
                              insertNewObjectForEntityForName:@"PlayingCard"
                              inManagedObjectContext:[[AppDelegate sharedAppDelegate] managedObjectContext]];
     
-    newPC.rank = pokerCard.rank;
-    newPC.suit = pokerCard.suit;
+    newPC.rank = pokerCard.rankAsInitial;
+    newPC.suit = pokerCard.suitAsInitial;
     return newPC;    
 
 }

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "PlayingCard+WithInterface.h"
 
 @implementation AppDelegate
 
@@ -56,29 +57,33 @@
 
 #pragma mark - Da Game
 
+- (PokerCard *)dealCard{
+    
+    PokerCard *newCard = [self.currentPlayer getNewCard];
+    return newCard;
+    
+}
 
 #pragma mark - Player Gets and Saves
 
--(Customer *)getNewCustomer{
+- (void)addCurentCustomerToCoreDataFinished:(BOOL)finishedGame{
     
     Customer *newCustomer = [NSEntityDescription
                                     insertNewObjectForEntityForName:@"Customer"
                                     inManagedObjectContext:[self managedObjectContext]];
     
-    newCustomer.createdTime = [NSNumber numberWithDouble: round( [[NSDate date] timeIntervalSince1970])];
+    newCustomer.firstName = self.currentPlayer.firstName;
+    newCustomer.lastName = self.currentPlayer.lastName;
+    newCustomer.createdTime = [NSNumber numberWithDouble: self.currentPlayer.timeStartedGame];
+    newCustomer.finishedGame = [NSNumber numberWithBool:NO];
     newCustomer.uploaded = [NSNumber numberWithBool:NO];
-    newCustomer.currentPlayer = [NSNumber numberWithBool:YES];
+    
+    for (PokerCard *card in self.currentPlayer.pokerHand.hand){
+        PlayingCard *newCDCard = [PlayingCard playingCardFromPokerCard:card];
+        [newCustomer addPokerHandObject:newCDCard];
+    }
+    
     [self saveContext];
-    
-    // Shuffle up and deal
-    
-    return newCustomer;
-}
-
-- (PokerCard *)dealCard{
-    
-    PokerCard *newCard = [self.currentPlayer getNewCard];
-    return newCard;
     
 }
 

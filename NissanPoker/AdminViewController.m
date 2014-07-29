@@ -7,9 +7,7 @@
 //
 
 #import "AdminViewController.h"
-#import "PlayingCardView.h"
-#import "PokerCard.h"
-#import "PokerHand.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface AdminViewController ()
 
@@ -77,22 +75,73 @@
 
 - (IBAction)testTapped:(id)sender {
     
+    /*
+    NSURL *url = [[NSURL alloc] initWithString:@"http://www.xplorious.com/wineryxplorer/wino/venue_product_features"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *responseDictionary = responseObject;
+        
+        NSArray *features = [responseDictionary objectForKey:@"venue_features"];
+        NSString *firstFeature = features[0];
+        
+        UIAlertView *successAlert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                               message:firstFeature
+                                                              delegate:nil
+                                                     cancelButtonTitle:@"Cancel"
+                                                     otherButtonTitles: nil];
+        
+        [successAlert show];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Failure!"
+                                                               message:nil
+                                                              delegate:nil
+                                                     cancelButtonTitle:@"Cancel"
+                                                     otherButtonTitles:nil];
+        
+        [failureAlert show];
+        
+    }];
+    
+    [operation start];
+    */
+    
     PokerDeck *testDeck = [[PokerDeck alloc] init];
-    
     PokerHand *testHand = [[PokerHand alloc] init];
-
     
-    for (int i = 0; i < 7; i++) {
-        //NSLog(@"Card #%d", i);
+    for (int i = 0; i < 7; i++){
         [testHand addCard:[testDeck drawCard]];
     }
     
-    if (self.previousHand) {
-        NSComparisonResult result = [testHand compareTo:self.previousHand];
-        NSLog(@"%ld",result);
-    }
     
-    self.previousHand = testHand;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *params = @{@"First Name": @"Yosefu",
+                             @"Last Name": @"Nissan",
+                             @"Hand": [testHand bestHandAsStringInitials],
+                             @"Hand Value": [NSNumber numberWithInt:testHand.handValue]};
+    
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    
+    [manager POST:@"http://localhost/phptest/postbarf.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"Succeeded"];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [SVProgressHUD showErrorWithStatus:@"Failed"];
+    }];
+    
     
 }
 

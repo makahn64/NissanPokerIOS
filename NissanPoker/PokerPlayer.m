@@ -29,7 +29,6 @@
     return self;
 }
 
-
 - (PokerCard *)getNewCard
 {
     PokerCard *newCard = self.deck.drawCard;

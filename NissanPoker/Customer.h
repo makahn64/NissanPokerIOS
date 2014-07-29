@@ -1,8 +1,8 @@
 //
 //  Customer.h
-//  NissanPoker
+//  Nissan Poker
 //
-//  Created by Mitchell Kahn on 7/9/14.
+//  Created by Jasper Kahn on 7/29/14.
 //  Copyright (c) 2014 AppDelegates. All rights reserved.
 //
 
@@ -13,12 +13,12 @@
 
 @interface Customer : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * createdTime;
 @property (nonatomic, retain) NSString * emailAddress;
+@property (nonatomic, retain) NSNumber * finishedGame;
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSNumber * uploaded;
-@property (nonatomic, retain) NSNumber * createdTime;
-@property (nonatomic, retain) NSNumber * currentPlayer;
 @property (nonatomic, retain) NSSet *pokerHand;
 @end
 
