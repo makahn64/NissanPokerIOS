@@ -138,6 +138,11 @@
     return rankInitials[self.rankNumeric];
 }
 
+- (NSString *)rankSuitAsInitials
+{
+    return [[[self rankAsInitial] lowercaseString] stringByAppendingString:[self suitAsInitial]];
+}
+
 - (NSString *)rankName
 {
     NSArray *rankNames = @[@"?",@"Ace",@"Two",@"Three",@"Four",@"Five",@"Six",@"Seven",@"Eight",@"Nine",@"Ten",@"Jack",@"Queen",@"King",@"Ace",@"Joker"];

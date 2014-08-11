@@ -13,9 +13,7 @@
 @interface ARScannerViewController : ADQCARImageTargetsViewController <UIAlertViewDelegate, AVCaptureMetadataOutputObjectsDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *handCardViews;
-@property (strong, nonatomic) NSMutableArray *hand;
-@property (nonatomic, strong) Customer *customer;
 
-+ (NSArray *)getValidQRTargetValues;
++ (NSArray *)getValidARTargetValues;
 
 @end

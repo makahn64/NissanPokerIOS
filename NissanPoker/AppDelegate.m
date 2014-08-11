@@ -25,6 +25,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunchedBefore"]){
+    
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"QRScanningEnabled"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunchedBefore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
     return YES;
 }
 							
@@ -77,6 +86,7 @@
     newCustomer.createdTime = [NSNumber numberWithDouble: self.currentPlayer.timeStartedGame];
     newCustomer.finishedGame = [NSNumber numberWithBool:NO];
     newCustomer.uploaded = [NSNumber numberWithBool:NO];
+    newCustomer.handValue = [NSNumber numberWithInt:self.currentPlayer.pokerHand.handValue];
     
     for (PokerCard *card in self.currentPlayer.pokerHand.hand){
         PlayingCard *newCDCard = [PlayingCard playingCardFromPokerCard:card];

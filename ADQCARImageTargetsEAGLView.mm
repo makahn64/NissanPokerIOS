@@ -212,6 +212,8 @@ namespace {
 
 - (void)dealloc
 {
+    
+    NSLog(@"ADQCARView dealloc");
     [self deleteFramebuffer];
     
     // Tear down context
@@ -226,7 +228,7 @@ namespace {
         [augmentationTexture[i] release];
     }
 
-    [self.delegate release];
+    //[self.delegate release];
     [super dealloc];
 }
 

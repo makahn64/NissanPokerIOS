@@ -69,13 +69,19 @@ typedef enum {
     
 }
 
-@property (nonatomic, strong) UILabel *debugLabel;
+/*
+            SCOTT: I messed around with changing these to non-ARC weak (they were retain, except delegate.
+                    MADE NO DIFF. Mitch
+ 
+ */
+
+@property (nonatomic, unsafe_unretained) UILabel *debugLabel;
 @property (nonatomic) BOOL debugMode;
 // FIXME: What is the right non-ARC delegate type??
-@property (nonatomic, retain) id<ADQCARImageTargetsEAGLViewDelegate> delegate;
-@property (nonatomic, retain) NSMutableArray *augmentationTexturesArray;
+@property (nonatomic, unsafe_unretained) id<ADQCARImageTargetsEAGLViewDelegate> delegate;
+@property (nonatomic, unsafe_unretained) NSMutableArray *augmentationTexturesArray;
 @property (nonatomic) ADQCARAugmentationType augmentationType;
-@property (nonatomic, strong) ADQCARApplicationSession *arSession;
+@property (nonatomic, unsafe_unretained) ADQCARApplicationSession *arSession;
 
 
 

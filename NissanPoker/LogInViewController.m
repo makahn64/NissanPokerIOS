@@ -7,7 +7,7 @@
 //
 
 #import "LogInViewController.h"
-#import "ScannerViewController.h"
+#import "QRScannerViewController.h"
 
 #define FIRST_NAME_TEXT_FIELD 100
 #define LAST_NAME_TEXT_FIELD 101
@@ -239,10 +239,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ( [[segue destinationViewController] isKindOfClass:[ScannerViewController class]] )
+    if ( [[segue destinationViewController] isKindOfClass:[QRScannerViewController class]] )
     {
-        AppDelegate *appD = [AppDelegate sharedAppDelegate];
-        
+        //AppDelegate *appD = [AppDelegate sharedAppDelegate];
+        /*
         Customer *c = [appD addCurentCustomerToCoreData];
         c.firstName = self.firstNameField.text;
         c.lastName = self.lastNameField.text;
@@ -251,6 +251,7 @@
         
         ScannerViewController *qvc = (ScannerViewController *)[segue destinationViewController];
         qvc.customer = c;
+        */
     }
     
 }

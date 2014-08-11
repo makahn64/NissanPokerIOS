@@ -172,24 +172,36 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+    /*
     NSDictionary *params = @{@"First Name": self.firstNameTextField.text,
                              @"Last Name": self.lastNameTextField.text,
                              @"Hand": [self.finalPokerHand bestHandAsStringInitials],
                              @"Hand Value": [NSNumber numberWithInt: self.finalPokerHand.handValue]};
-    
+    */
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     
-    [manager POST:@"http://localhost/phptest/postbarf.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //TODO: URL encode (here and elsewhere)
+    NSString *submitURL = [NSString stringWithFormat:(@"http://192.168.1.21:3030/player/%@/%@/"), self.firstNameTextField.text, self.lastNameTextField.text];
+    
+    for (PokerCard *card in ad.currentPlayer.pokerHand.hand){
+        submitURL = [submitURL stringByAppendingString:[card rankSuitAsInitials]];
+        submitURL = [submitURL stringByAppendingString:@"/"];
+    }
+    
+    submitURL = [submitURL stringByAppendingString: [NSString stringWithFormat:(@"%d"), ad.currentPlayer.pokerHand.handValue] ];
+    //TODO: UIAlert before pop to root
+    [manager GET:submitURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         [SVProgressHUD showSuccessWithStatus:@"Succeeded"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [SVProgressHUD showErrorWithStatus:@"Failed"];
         [[AppDelegate sharedAppDelegate] addCurentCustomerToCoreDataFinished:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
     
 }

@@ -12,7 +12,6 @@
 @interface WelcomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *continueLabel;
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 
 @end
 
@@ -45,7 +44,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.continueLabel.alpha = 0.0;
-    self.tapGestureRecognizer.enabled = NO;
+    //self.tapGestureRecognizer.enabled = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -62,12 +61,11 @@
                          
                      }
                      completion:^(BOOL finished) {
-                         self.tapGestureRecognizer.enabled = YES;
+                         //self.tapGestureRecognizer.enabled = YES;
                      }];
 }
 
 #pragma mark - Actions
-
 
 /*
 #pragma mark - Navigation

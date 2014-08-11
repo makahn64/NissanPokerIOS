@@ -31,6 +31,7 @@
 - (NSString *)suitAsUnicodeCharacter;
 - (NSString *)suitAsInitial;
 - (NSString *)rankAsInitial;
+- (NSString *)rankSuitAsInitials;
 - (NSString *)rankName;
 
 - (BOOL)isFaceCard;

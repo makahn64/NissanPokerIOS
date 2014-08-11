@@ -127,7 +127,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     [tapGestureRecognizer release];
     
     [vapp release];
-    [eaglView release];
+    //[eaglView release];
     
     [super dealloc];
 }
@@ -159,6 +159,8 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 {
     [super viewDidLoad];
     //[self prepareMenu];
+    
+    NSLog(@"ADQCARITVC viewDidLoad");
 
     eaglView = (ADQCARImageTargetsEAGLView *)self.view;
     [eaglView setArSession:vapp];
@@ -172,15 +174,44 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
     NSLog(@"self.navigationController.navigationBarHidden:%d",self.navigationController.navigationBarHidden);
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"ADQCARITVC viewWillAppear");
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"ADQCARITVC viewDidAppear");
+
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     
+    NSLog(@"ADQCARITVC viewWillDisappear");
+
     [vapp stopAR:nil];
     // Be a good OpenGL ES citizen: now that QCAR is paused and the render
     // thread is not executing, inform the root view controller that the
     // EAGLView should finish any OpenGL ES commands
     [eaglView finishOpenGLESCommands];
     [eaglView freeOpenGLESResources];
+    
+    eaglView = (ADQCARImageTargetsEAGLView *)self.view;
+
+    [vapp stopAR:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [eaglView setDelegate:nil];
+    [super viewWillDisappear:animated];
 }
+
+-(void)viewDidDisappear:(BOOL)animated {
+    
+    NSLog(@"ADQCARITVC viewDIDDisappear");
+    [super viewDidDisappear:animated];
+
+}
+
 
 - (void)finishOpenGLESCommands
 {
@@ -275,7 +306,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 // Probably useless for generic
 - (bool) doLoadTrackersData {
     
-    dataSetNew = [self loadImageTrackerDataSet:@"NSPoker2.xml"];
+    dataSetNew = [self loadImageTrackerDataSet:@"NissanPokerProto.xml"];
 
     if ( dataSetNew == NULL ) {
         NSLog(@"Failed to load dataset");

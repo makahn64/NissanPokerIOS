@@ -5,6 +5,7 @@
         <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="finishedGame" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="handValue" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uploaded" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="pokerHand" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlayingCard" inverseName="myCustomer" inverseEntity="PlayingCard" syncable="YES"/>
@@ -15,7 +16,7 @@
         <relationship name="myCustomer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Customer" inverseName="pokerHand" inverseEntity="Customer" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Customer" positionX="0" positionY="0" width="128" height="148"/>
+        <element name="Customer" positionX="0" positionY="0" width="128" height="165"/>
         <element name="PlayingCard" positionX="351" positionY="63" width="128" height="90"/>
     </elements>
 </model>

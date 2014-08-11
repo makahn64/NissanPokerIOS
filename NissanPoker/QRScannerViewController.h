@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScannerViewController : UIViewController <UIAlertViewDelegate, AVCaptureMetadataOutputObjectsDelegate, UICollectionViewDataSource>
+@interface QRScannerViewController : UIViewController <UIAlertViewDelegate, AVCaptureMetadataOutputObjectsDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *handCardViews;
 

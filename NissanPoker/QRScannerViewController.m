@@ -6,15 +6,16 @@
 //  Copyright (c) 2014 AppDelegates. All rights reserved.
 //
 
-#import "ScannerViewController.h"
+#import "QRScannerViewController.h"
 #import "SubmitHandViewController.h"
 #import "PlayingCard+WithInterface.h"
 #import "PlayingCardView.h"
 #import "PokerHand.h"
 
-#define UI_ALERTVIEW_QUIT 200
+#define UI_ALERTVIEW_ADMIN 200
+#define UI_ALERTVIEW_CONFIRM_ABONDON 201
 
-@interface ScannerViewController ()
+@interface QRScannerViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *infoPopupView;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
@@ -36,7 +37,7 @@
 @end
 
 
-@implementation ScannerViewController
+@implementation QRScannerViewController
 
 
 #pragma mark - Target QR Values
@@ -71,6 +72,10 @@
     
     [self setupCardViews];
     [self setupVideoCaptureSession];
+    
+    //Setup the valid target array
+    self.validQRTargetValues = [NSMutableArray arrayWithArray:[QRScannerViewController getValidQRTargetValues]];
+    
     [self setupPopupViews];
     
 }
@@ -158,10 +163,6 @@
         
         [_captureSession startRunning];
     }
-    
-    //Setup the valid target array
-    
-    self.validQRTargetValues = [NSMutableArray arrayWithArray:[ScannerViewController getValidQRTargetValues]];
     
 }
 
@@ -300,6 +301,7 @@
     
     if ([self.validQRTargetValues count] > 0)
     {
+        [self.bigPlayingCard flipCardAnimated];
         [UIView animateWithDuration:.75
                          animations:^{
                              self.continueButton.alpha = 0.0;
@@ -317,10 +319,65 @@
     
     else
     {
-        [self performSegueWithIdentifier:@"submitScreenSegue" sender:self];
+        [self performSegueWithIdentifier:@"toSubmitFromQR" sender:self];
+    }
+
+}
+
+- (IBAction)adminRegionTriggered:(id)sender {
+    
+    UIAlertView *adminAV = [[UIAlertView alloc] initWithTitle:@"Administrator Access"
+                                                      message:@"Choose a command"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@"Finish & Submit", @"Abondon Game", nil];
+    adminAV.tag = UI_ALERTVIEW_ADMIN;
+    
+    [adminAV show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+
+    if (alertView.tag == UI_ALERTVIEW_ADMIN && buttonIndex != alertView.cancelButtonIndex) {
+        
+        if ([[alertView buttonTitleAtIndex:buttonIndex]  isEqual: @"Finish & Submit"]){
+            
+            NSMutableArray *currentHand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.hand;
+            
+            while ([currentHand count] < 7) {
+                
+                [[AppDelegate sharedAppDelegate] dealCard];
+                
+            }
+            
+            [self performSegueWithIdentifier:@"toSubmitFromQR" sender:self];
+            
+        }
+        
+        else if ([[alertView buttonTitleAtIndex:buttonIndex]  isEqual: @"Abondon Game"]){
+            
+            UIAlertView *confirmAbondonAV = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                                                       message:@"This will cancel and clear the current game. You cannot undo this action"
+                                                                      delegate:self
+                                                             cancelButtonTitle:@"Cancel"
+                                                             otherButtonTitles:@"Abondon Game", nil];
+            confirmAbondonAV.tag = UI_ALERTVIEW_CONFIRM_ABONDON;
+            
+            [confirmAbondonAV show];
+            
+        }
+        
+    }
+    
+    else if (alertView.tag == UI_ALERTVIEW_CONFIRM_ABONDON && buttonIndex != alertView.cancelButtonIndex){
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
     }
     
 }
+
 
 
 /*

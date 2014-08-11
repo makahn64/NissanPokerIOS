@@ -13,7 +13,8 @@
 #import "PlayingCardView.h"
 #import "PokerHand.h"
 
-#define UI_ALERTVIEW_QUIT 200
+#define UI_ALERTVIEW_ADMIN 200
+#define UI_ALERTVIEW_CONFIRM_ABONDON 201
 
 @interface ARScannerViewController ()
 
@@ -23,16 +24,6 @@
 @property (weak, nonatomic) IBOutlet PlayingCardView *bigPlayingCard;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *currentHandCollectionView;
-
-/*
-@property (weak, nonatomic) IBOutlet UIView *videoPreviewView;
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
-
-@property (strong, nonatomic) AVCaptureSession *captureSession;
-@property (strong, nonatomic) AVCaptureDevice *captureDevice;
-@property (strong, nonatomic) AVCaptureDeviceInput *captureInput;
-@property (strong, nonatomic) AVCaptureMetadataOutput *captureMetadataOutput;
-*/
 
 @property (strong, nonatomic) NSMutableArray *validARTargetValues;
 
@@ -46,17 +37,24 @@
 
 + (NSArray *)getValidARTargetValues
 {
-    return @[@"Chip_01",
-             @"Chip_02",
-             @"UglyTarget",
-             @"NissanPokerTarget4",
-             @"NissanPokerTarget5",
-             @"NissanPokerTarget6",
-             @"NissanPokerTarget7"];
+    return @[@"target1B",
+             @"target2B",
+             @"target3B",
+             @"target4B",
+             @"target5B",
+             @"target6B",
+             @"target7B"];
 }
 
 #pragma mark - Life Cycle of View
 
+
+-(void)adbandonAllHope {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSLog(@"Killing myself!");
+    
+}
 
 - (void)viewDidLoad
 {
@@ -67,16 +65,10 @@
     
     [AppDelegate sharedAppDelegate].currentPlayer = [[PokerPlayer alloc] init];
     
-    self.hand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.hand;
-    
-    // [mak] moved this here from the video setup which is no longer needed.
-    // it should have been here anyway sinceit was unrelated to the video setup.
     self.validARTargetValues = [NSMutableArray arrayWithArray:[ARScannerViewController getValidARTargetValues]];
 
     
     [self setupCardViews];
-    [self setupNewCustomer];
-    //[self setupVideoCaptureSession];
     [self setupPopupViews];
     
 }
@@ -102,20 +94,6 @@
     [self.currentHandCollectionView reloadData];
 }
 
-- (void)setupNewCustomer
-{
-    AppDelegate *appD = [AppDelegate sharedAppDelegate];
-    
-    Customer *c = [appD getNewCustomer];
-    c.firstName = @"NewCustomer";
-    c.lastName = @"Unassigned";
-    c.emailAddress = @"test@appdelegates.com";
-    [appD saveContext];
-    
-    self.customer = c;
-}
-
-
 - (void)setupPopupViews
 {
     self.infoPopupView.transform = CGAffineTransformMakeScale(0.0, 0.0);
@@ -140,6 +118,8 @@
     
     return cell;
 }
+
+#pragma mark - AR Recognition
 
 -(void)targetAcquired:(NSNotification *)notification{
     
@@ -173,44 +153,10 @@
 
 #pragma mark - Actions
 
-/*
-
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
-{
-    
-    if (metadataObjects != nil && [metadataObjects count] > 0)
-    {
-        
-        AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
-        
-        if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode])
-        {
-            if ( [self.validQRTargetValues containsObject:[metadataObj stringValue]] )
-            {
-                NSLog(@"Read %@", [metadataObj stringValue]);
-                
-                [self performSelectorOnMainThread:@selector(alertQRScanned:)
-                                       withObject:[metadataObj stringValue]
-                                    waitUntilDone:NO];
-                
-                [self.validQRTargetValues removeObject: [metadataObj stringValue] ];
-                [self.captureSession stopRunning];
-            }
-            
-        }
-
-    }
-}
- 
- */
-
 - (void)alertARScanned:(NSString *)qrMessage
 {
     
     PokerCard *newCard = [[AppDelegate sharedAppDelegate] dealCard];
-    [self.customer addPokerHandObject:[PlayingCard playingCardFromPokerCard:newCard]];
-    
-    [[AppDelegate sharedAppDelegate] saveContext];
     
     [self displayCard: newCard];
     
@@ -287,6 +233,7 @@
     
     if ([self.validARTargetValues count] > 0)
     {
+        [self.bigPlayingCard flipCardAnimated];
         [UIView animateWithDuration:.75
                          animations:^{
                              self.continueButton.alpha = 0.0;
@@ -302,15 +249,67 @@
     
     else
     {
-        AppDelegate *appD = [AppDelegate sharedAppDelegate];
-        
-        Customer *c = [appD getNewCustomer];
-        //c.pokerHand = [NSSet setWithArray:self.currentHand];
-        [appD saveContext];
-        [self performSegueWithIdentifier:@"submitScreenSegue" sender:self];
+        [self performSegueWithIdentifier:@"toSubmitFromAR" sender:self];
     }
     
 }
+
+- (IBAction)adminRegionTriggered:(id)sender {
+    
+    UIAlertView *adminAV = [[UIAlertView alloc] initWithTitle:@"Administrator Access"
+                                                      message:@"Choose a command"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@"Finish & Submit", @"Abondon Game", nil];
+    adminAV.tag = UI_ALERTVIEW_ADMIN;
+    
+    [adminAV show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    
+    if (alertView.tag == UI_ALERTVIEW_ADMIN && buttonIndex != alertView.cancelButtonIndex) {
+        
+        if ([[alertView buttonTitleAtIndex:buttonIndex]  isEqual: @"Finish & Submit"]){
+            
+            NSMutableArray *currentHand = [AppDelegate sharedAppDelegate].currentPlayer.pokerHand.hand;
+            
+            while ([currentHand count] < 7) {
+                
+                [[AppDelegate sharedAppDelegate] dealCard];
+                
+            }
+            
+            [self performSegueWithIdentifier:@"toSubmitFromAR" sender:self];
+            
+        }
+        
+        else if ([[alertView buttonTitleAtIndex:buttonIndex]  isEqual: @"Abondon Game"]){
+            
+            UIAlertView *confirmAbondonAV = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                                                       message:@"This will cancel and clear the current game. You cannot undo this action"
+                                                                      delegate:self
+                                                             cancelButtonTitle:@"Cancel"
+                                                             otherButtonTitles:@"Abondon Game", nil];
+            confirmAbondonAV.tag = UI_ALERTVIEW_CONFIRM_ABONDON;
+            
+            [confirmAbondonAV show];
+            
+        }
+        
+    }
+    
+    else if (alertView.tag == UI_ALERTVIEW_CONFIRM_ABONDON && buttonIndex != alertView.cancelButtonIndex){
+        
+        [self performSelector:@selector(adbandonAllHope)
+                   withObject:nil
+                    afterDelay:1.5];
+    }
+    
+}
+
+
 
 
 /*
@@ -318,14 +317,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
-    if ( [[segue destinationViewController] isKindOfClass:[SubmitHandViewController class]] )
-    {
-        SubmitHandViewController *shvc = (SubmitHandViewController *)[segue destinationViewController];
-        shvc.currentHandViews = self.currentHandViews;
-        shvc.currentHandCards = self.currentHandCards;
-    }
-    
 
 }
 */
