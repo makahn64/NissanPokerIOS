@@ -25,11 +25,19 @@
 
 + (AppDelegate *)sharedAppDelegate;
 
++ (UIColor *)nissanRed;
++ (UIColor *)nissanGrey;
+
 - (NSURL *)applicationDocumentsDirectory;
-- (void)addCurentCustomerToCoreDataFinished:(BOOL)finishedGame;
+- (void)addCurentCustomerToCoreData;
 - (void)saveContext;
 
 - (PokerCard *)dealCard;
 
+typedef enum {
+    NV200 = 0,
+    NV_CARGO_STANDARD = 1,
+    NV_CARGO_HIGH_ROOF = 2,
+} TargetVehicle;
 
 @end

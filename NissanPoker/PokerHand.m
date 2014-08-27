@@ -34,6 +34,7 @@
     self = [super init];
     if (self) {
         self.hand = [[NSMutableArray alloc] init];
+        [self updateHandValue];
     }
     return self;
 }
@@ -93,6 +94,7 @@
     if ([self.hand count] < 5)
     {
         _handValue = 0;
+        _handDescription = @"No Hand";
         return;
     }
     
@@ -320,6 +322,57 @@
 
 - (HandType)checkForStraightFlushWithStraight:(HandType)straightType
 {
+    
+    NSMutableArray *flushCards = [[NSMutableArray alloc] init];
+    
+    for (PokerCard *card in self.hand) {
+        if (card.suitNumeric == self.suitOfFlush) {
+            [flushCards addObject:card];
+        }
+    }
+    
+    //Variables used to compare to previous card and current state of the straight.
+    int numConsecutiveCards = 1;
+    int previousRank = -1;
+    
+    //Iterates through the hand from highest card to lowest looking for consecutive cards.
+    for (int i = 0; i < [flushCards count]; i++)
+    {
+        PokerCard *card = flushCards[i];
+        
+        if (card.rankNumeric == previousRank - 1)
+        {
+            numConsecutiveCards++;
+        }
+        else if (card.rankNumeric != previousRank)
+        {
+            //If it's the same rank (a pair within the straight) do nothing and continue.
+            numConsecutiveCards = 1;
+        }
+        
+        previousRank = card.rankNumeric;
+        
+        //Checks for lowball Ace in a straight (Ace to 5).
+        if (card.rankNumeric == 2 && numConsecutiveCards == 4)
+        {
+            PokerCard *firstCard = flushCards[0];
+            if (firstCard.rankNumeric == 14)
+            {
+                self.highRankOfStraight = 5;
+                return LowballStraightFlush;
+            }
+        }
+        
+        if (numConsecutiveCards == 5)
+        {
+            self.highRankOfStraight = previousRank + 4;
+            return StraightFlush;
+        }
+    }
+    //No straight found if it gets here.
+    return Nothing;
+    
+    /*
     int nextRank = self.highRankOfStraight;
     int count = 0;
     
@@ -346,7 +399,7 @@
     }
     
     return straightType;
-    
+    */
 }
 
 #pragma mark Value Calculator
@@ -407,6 +460,9 @@
             }
             PokerCard *highCard = finalHand[0];
             _handDescription = [NSString stringWithFormat:(@"Pair of %@s"), highCard.rankName];
+            if (self.rankOfHighPair == 6) {
+                _handDescription = [NSString stringWithFormat:(@"Pair of %@es"), highCard.rankName];
+            }
         }
             break;
             
@@ -482,7 +538,7 @@
                 }
             }
             for (PokerCard *card in self.hand) {
-                if (card.rankNumeric == self.rankOfHighPair) {
+                if (card.rankNumeric == self.rankOfHighPair && [finalHand count] < 5) {
                     [finalHand addObject:card];
                 }
             }
@@ -594,6 +650,30 @@
     handString = [handString stringByAppendingString:@"]"];
     
     return handString;
+}
+
+#pragma mark Useful Networking Info
+
+- (NSArray *)bestHandNetworkArray
+{
+    NSMutableArray *initialsArray = [[NSMutableArray alloc] initWithCapacity:5];
+    
+    if ([self.hand count] >= 5)
+    {
+        for (PokerCard *card in self.bestFiveCardHand) {
+            [initialsArray addObject:[card.rankAsInitial stringByAppendingString:card.suitAsInitial]];
+        }
+    }
+    else if ([self.hand count] > 0) {
+        for (PokerCard *card in self.hand) {
+            [initialsArray addObject:[card.rankAsInitial stringByAppendingString:card.suitAsInitial]];
+        }
+    }
+    else {
+        [initialsArray addObject:@""];
+    }
+    
+    return [NSArray arrayWithArray:initialsArray];
 }
     
 

@@ -10,28 +10,39 @@
 #import <AFNetworking/AFNetworking.h>
 
 #define UI_EXIT_ALERT 200
+/*
 #define UI_FINALROUND_ALERT 201
 #define UI_NEWCOMP_ALERT 202
 #define UI_COMPNUM_ALERT 203
 #define UI_CLEARBOARD_ALERT 204
+*/
+#define UI_IPCHANGE_ALERT 205
+#define UI_IPCHANGECONFIRM_ALERT 206
 
 @interface AdminViewController ()
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *scannerTypeControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *targetVehicleControl;
 
 @property (weak, nonatomic) IBOutlet UILabel *leaderboardSubtitleLabel;
-
+/*
 @property (nonatomic) int compNum;
 @property (weak, nonatomic) IBOutlet UIStepper *compNumStepper;
 @property (weak, nonatomic) IBOutlet UIButton *compNumUpdateButton;
 @property (weak, nonatomic) IBOutlet UILabel *compNumLabel;
-
+*/
 @property (weak, nonatomic) IBOutlet UIButton *uploadHandsButton;
 
+@property (weak, nonatomic) IBOutlet UISlider *timeoutSlider;
+@property (weak, nonatomic) IBOutlet UILabel *timeoutLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeoutWarning;
+
 @property (nonatomic) BOOL qrEnabled;
-@property (strong, nonatomic) UIColor *nissanRed;
+@property (strong, nonatomic) NSString *updatedLeaderboardAddress;
 
 @property (strong, nonatomic) NSArray *savedHands;
+
+@property (weak, nonatomic) IBOutlet UILabel *deviceIDLabel;
 
 @end
 
@@ -53,10 +64,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.nissanRed = [AppDelegate sharedAppDelegate].window.tintColor;
 
     self.qrEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"QRScanningEnabled"];
+    self.updatedLeaderboardAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"];
     
     if (self.qrEnabled) {
         self.scannerTypeControl.selectedSegmentIndex = 1;
@@ -65,6 +75,16 @@
         self.scannerTypeControl.selectedSegmentIndex = 0;
     }
     
+    self.targetVehicleControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"targetVehicle"];
+    
+    self.timeoutSlider.value = [[NSUserDefaults standardUserDefaults] integerForKey:@"timeout"];
+    [self updateTimeoutLabels];
+    
+    self.deviceIDLabel.text = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
+    [self checkConnectionInitial];
+    
+    /*
     self.compNumStepper.tintColor = [UIColor grayColor];
     self.compNumStepper.userInteractionEnabled = NO;
     self.compNumUpdateButton.tintColor = [UIColor grayColor];
@@ -74,7 +94,10 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    [manager GET:@"http://192.168.1.21:3030/getGameNumber" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *baseURL = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"];
+    NSLog([baseURL stringByAppendingString:@"/getGameNumber"], nil);
+    
+    [manager GET:[baseURL stringByAppendingString:@"/getGameNumber"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSDictionary *responseJSON = responseObject;
         
@@ -86,7 +109,7 @@
         self.compNumStepper.value = gameNumber.intValue;
         self.compNum = gameNumber.intValue;
         
-        self.compNumStepper.tintColor = self.nissanRed;
+        self.compNumStepper.tintColor = [AppDelegate nissanRed];
         self.compNumStepper.userInteractionEnabled = YES;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -95,14 +118,15 @@
         self.compNumLabel.text = @"---";
         
     }];
+    */
     
     [self setUpCoreDataElements];
     
     //TODO: Add superuser control
-    /*
+    
     self.scannerTypeControl.userInteractionEnabled = NO;
     self.scannerTypeControl.tintColor = [UIColor grayColor];
-    */
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,7 +194,7 @@
     self.qrEnabled = !self.qrEnabled;
     
 }
-
+/*
 #pragma mark Leaderboard
 
 - (IBAction)changedCompNum:(id)sender {
@@ -186,7 +210,7 @@
     
     else {
     
-        self.compNumUpdateButton.tintColor = self.nissanRed;
+        self.compNumUpdateButton.tintColor = [AppDelegate nissanRed];
         self.compNumUpdateButton.userInteractionEnabled = YES;
     
     }
@@ -220,44 +244,118 @@
     [finalRoundAlert show];
     
 }
+*/
+
+- (IBAction)targetVehicleChanged:(id)sender {
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:self.targetVehicleControl.selectedSegmentIndex forKey:@"targetVehicle"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 
 - (IBAction)checkConnectionTapped:(id)sender {
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     
-    [manager GET:@"http://192.168.1.21:3030/getGameNumber" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self checkConnection];
+}
+
+- (void)checkConnection
+{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSString *baseURL = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"];
+    
+    [manager GET:[baseURL stringByAppendingString:@"/players/test"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        NSDictionary *responseJSON = responseObject;
+        //NSDictionary *responseJSON = responseObject;
         
-        NSNumber *gameNumber = [responseJSON objectForKey:@"data"];
-        
-        self.leaderboardSubtitleLabel.text = [NSString stringWithFormat:@"Current Competition: %d", gameNumber.intValue];
-        self.compNumLabel.text = [NSString stringWithFormat:@"%d", gameNumber.intValue];
-        self.compNumStepper.value = gameNumber.intValue;
-        self.compNum = gameNumber.intValue;
-        
-        self.compNumStepper.tintColor = self.nissanRed;
-        self.compNumStepper.userInteractionEnabled = YES;
-        self.compNumUpdateButton.tintColor = [UIColor grayColor];
-        self.compNumUpdateButton.userInteractionEnabled = NO;
+        /*
+         
+         NSNumber *gameNumber = [responseJSON objectForKey:@"data"];
+         
+         self.leaderboardSubtitleLabel.text = [NSString stringWithFormat:@"Current Competition: %d", gameNumber.intValue];
+         self.compNumLabel.text = [NSString stringWithFormat:@"%d", gameNumber.intValue];
+         self.compNumStepper.value = gameNumber.intValue;
+         self.compNum = gameNumber.intValue;
+         
+         self.compNumStepper.tintColor = [AppDelegate nissanRed];
+         self.compNumStepper.userInteractionEnabled = YES;
+         self.compNumUpdateButton.tintColor = [UIColor grayColor];
+         self.compNumUpdateButton.userInteractionEnabled = NO;
+         
+         */
+        self.leaderboardSubtitleLabel.text = @"Connected";
         
         [SVProgressHUD showSuccessWithStatus:@"Connected!"];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        self.compNumStepper.tintColor = [UIColor grayColor];
-        self.compNumStepper.userInteractionEnabled = NO;
-        self.compNumUpdateButton.tintColor = [UIColor grayColor];
-        self.compNumUpdateButton.userInteractionEnabled = NO;
+        
+        /*
+         self.compNumStepper.tintColor = [UIColor grayColor];
+         self.compNumStepper.userInteractionEnabled = NO;
+         self.compNumUpdateButton.tintColor = [UIColor grayColor];
+         self.compNumUpdateButton.userInteractionEnabled = NO;
+         */
+        
+        self.leaderboardSubtitleLabel.text = @"No Connection";
         
         [SVProgressHUD showErrorWithStatus:@"No Connection"];
     }];
+
     
 }
 
+- (void)checkConnectionInitial
+{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSString *baseURL = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"];
+    
+    [manager GET:[baseURL stringByAppendingString:@"/players/test"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        //NSDictionary *responseJSON = responseObject;
+        
+        /*
+         
+         NSNumber *gameNumber = [responseJSON objectForKey:@"data"];
+         
+         self.leaderboardSubtitleLabel.text = [NSString stringWithFormat:@"Current Competition: %d", gameNumber.intValue];
+         self.compNumLabel.text = [NSString stringWithFormat:@"%d", gameNumber.intValue];
+         self.compNumStepper.value = gameNumber.intValue;
+         self.compNum = gameNumber.intValue;
+         
+         self.compNumStepper.tintColor = [AppDelegate nissanRed];
+         self.compNumStepper.userInteractionEnabled = YES;
+         self.compNumUpdateButton.tintColor = [UIColor grayColor];
+         self.compNumUpdateButton.userInteractionEnabled = NO;
+         
+         */
+        self.leaderboardSubtitleLabel.text = @"Connected";
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        /*
+         self.compNumStepper.tintColor = [UIColor grayColor];
+         self.compNumStepper.userInteractionEnabled = NO;
+         self.compNumUpdateButton.tintColor = [UIColor grayColor];
+         self.compNumUpdateButton.userInteractionEnabled = NO;
+         */
+        
+        self.leaderboardSubtitleLabel.text = @"No Connection";
+    }];
+    
+    
+}
+
+
+/*
 - (IBAction)clearLeaderboardTapped:(id)sender {
     
     UIAlertView *clearLeaderboardAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
@@ -285,31 +383,72 @@
     [clearLeaderboardAlert show];
     
 }
+*/
+- (IBAction)changeIP:(id)sender {
+    
+    NSString *message = @"Please enter the new address.\nONLY CHANGE THIS IF YOU KNOW WHAT YOU ARE DOING.\n\n Include \"http://\".";
+    
+    UIAlertView *changeIPAlert = [[UIAlertView alloc] initWithTitle:@"Leaderboard Address"
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Change Address", nil];
+    
+    changeIPAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    NSMutableAttributedString *address = [[NSMutableAttributedString alloc] initWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"]];
+    [address addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 7)];
+    [changeIPAlert textFieldAtIndex:0].attributedText = address;
+    
+    [[changeIPAlert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeURL];
+    [[changeIPAlert textFieldAtIndex:0] setDelegate:self];
+    changeIPAlert.tag = UI_IPCHANGE_ALERT;
+    
+    [changeIPAlert show];
+    
+
+}
 
 #pragma mark Core Data
 
 - (IBAction)uploadHands:(id)sender {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     
     __block int successes = 0;
     
     for (Customer *c in self.savedHands) {
-    
-        NSString *submitURL = [NSString stringWithFormat:(@"http://192.168.1.21:3030/player/%@/%@/"), c.firstName, c.lastName];
         
-        for (PlayingCard *card in c.pokerHand){
-            
-            submitURL = [submitURL stringByAppendingString:[ [card.rank lowercaseString] stringByAppendingString:card.suit] ];
-            submitURL = [submitURL stringByAppendingString:@"/"];
+        NSDictionary *name = @{@"firstName": c.firstName,
+                               @"lastName": c.lastName};
+        
+        NSMutableArray *cardsArray = [[NSMutableArray alloc] initWithCapacity:5];
+        for (PlayingCard *card in c.pokerHand) {
+            [cardsArray addObject:[card.rank stringByAppendingString:card.suit]];
         }
         
-        submitURL = [submitURL stringByAppendingString: [NSString stringWithFormat:(@"%@"), c.handValue]];
+        NSDictionary *metrics = @{@"deviceID": c.deviceID,
+                                  @"timeStartedGame": c.createdTime,
+                                  @"gameDuration": c.gameDuration,
+                                  @"abandoned": c.abandonedGame,
+                                  @"complete": c.finishedGame,
+                                  @"vehicle": c.vehicle};
         
-        [manager GET:submitURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *params = @{@"name": name,
+                                 @"deviceID": c.deviceID,
+                                 @"hand": cardsArray,
+                                 @"score": c.handValue,
+                                 @"description": c.handDescription,
+                                 @"metrics": metrics};
+        
+        NSString *baseURL = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"];
+    
+        NSString *submitURL = [baseURL stringByAppendingString:@"/players/register"];
+        
+        [manager POST:submitURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             c.uploaded = [NSNumber numberWithBool:YES];
             successes++;
@@ -352,6 +491,38 @@
     
 }
 
+#pragma mark Timeout
+
+
+- (IBAction)timeoutValueChanged:(id)sender {
+    
+    NSInteger value = (int)roundf(self.timeoutSlider.value);
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:@"timeout"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self updateTimeoutLabels];
+    
+}
+
+
+- (void)updateTimeoutLabels
+{
+    
+    self.timeoutSlider.value = (int)roundf(self.timeoutSlider.value);
+    
+    if (self.timeoutSlider.value > 60) {
+        self.timeoutLabel.text = @"OFF";
+        self.timeoutWarning.hidden = NO;
+    }
+    
+    else {
+        self.timeoutWarning.hidden = YES;
+        self.timeoutLabel.text = [NSString stringWithFormat:@"%d Seconds", (int)roundf(self.timeoutSlider.value)];
+    }
+    
+}
+
 #pragma mark - Reactions
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -365,16 +536,27 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         
-        else {
+        else if (alertView.tag == UI_IPCHANGECONFIRM_ALERT) {
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.updatedLeaderboardAddress forKey:@"leaderboardAddress"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            self.leaderboardSubtitleLabel.text = @"New IP Address, please hit check connection to refresh.";
+            
+        }
+        /*
+        else if (alertView.tag == UI_NEWCOMP_ALERT || alertView.tag == UI_FINALROUND_ALERT || alertView.tag == UI_COMPNUM_ALERT || alertView.tag == UI_CLEARBOARD_ALERT) {
             
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
             
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
             
+            NSString *baseURL = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"];
+            
             if (alertView.tag == UI_NEWCOMP_ALERT) {
                 
-                [manager GET:@"http://192.168.1.21:3030/newGame" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [manager GET:[baseURL stringByAppendingString:@"/newGame"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"JSON: %@", responseObject);
                     [SVProgressHUD showSuccessWithStatus:@"Done"];
                     [self dismissViewControllerAnimated:YES completion:nil];
@@ -388,7 +570,7 @@
             
             else if (alertView.tag == UI_FINALROUND_ALERT) {
                 
-                [manager GET:@"http://192.168.1.21:3030/startShowdown" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [manager GET:[baseURL stringByAppendingString:@"/startShowdown"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"JSON: %@", responseObject);
                     [SVProgressHUD showSuccessWithStatus:@"Done"];
                     [self dismissViewControllerAnimated:YES completion:nil];
@@ -402,7 +584,7 @@
             
             else if (alertView.tag == UI_COMPNUM_ALERT) {
                 
-                NSString *compNumURL = [NSString stringWithFormat:@"http://192.168.1.21:3030/changeGame/%d", (int) self.compNumStepper.value];
+                NSString *compNumURL = [baseURL stringByAppendingString:[NSString stringWithFormat:@"/changeGame/%d", (int) self.compNumStepper.value]];
                 
                 [manager GET:compNumURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"JSON: %@", responseObject);
@@ -417,7 +599,7 @@
             
             else if (alertView.tag == UI_CLEARBOARD_ALERT) {
                 
-                [manager GET:@"http://192.168.1.21:3030/clearPlayers" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [manager GET:[baseURL stringByAppendingString:@"/clearPlayers"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"JSON: %@", responseObject);
                     [SVProgressHUD showSuccessWithStatus:@"Done"];
                     [self dismissViewControllerAnimated:YES completion:nil];
@@ -430,9 +612,45 @@
             }
             
         }
+         
+         */
+         
     }
 }
 
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+
+    if (alertView.tag == UI_IPCHANGE_ALERT && buttonIndex != alertView.cancelButtonIndex) {
+        
+        self.updatedLeaderboardAddress = [alertView textFieldAtIndex:0].text;
+        
+        UIAlertView *confirmAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                                               message:@"Do you wish to save this address change?"
+                                                              delegate:self
+                                                     cancelButtonTitle:@"Cancel"
+                                                     otherButtonTitles:@"Confirm", nil];
+        confirmAlert.tag = UI_IPCHANGECONFIRM_ALERT;
+        [confirmAlert show];
+        
+    }
+
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSRange overlap = NSIntersectionRange(NSMakeRange(0, 7), range);
+    
+    if (overlap.length > 0) {
+        return NO;
+    }
+    else {
+        textField.typingAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
+        
+        return YES;
+    }
+    
+}
 
 /*
 #pragma mark - Navigation

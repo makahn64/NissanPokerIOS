@@ -28,6 +28,9 @@
 
 @property (weak, nonatomic) NSString *currentSuit;
 
+@property (nonatomic) BOOL isSmall;
+@property (nonatomic) BOOL imageBased;
+
 @end
 
 @implementation PlayingCardView
@@ -42,6 +45,7 @@
     if (self)
     {
         self.autoresizesSubviews = YES;
+        self.isSmall = NO;
         [self setupSubviews];
     }
     
@@ -57,7 +61,22 @@
     if (self) {
         
         self.autoresizesSubviews = YES;
+        self.isSmall = NO;
         [self setupSubviews];
+        
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame andIsSmall:(BOOL)isSmall
+{
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        
+        self.autoresizesSubviews = YES;
+        self.isSmall = isSmall;
+        [self setupImageSubviews];
         
     }
     return self;
@@ -71,10 +90,10 @@
 {
     //Initialize and add the "sides" of the card
     UIImageView *frontView = [[UIImageView alloc] initWithFrame:self.bounds];
-    frontView.image = [UIImage imageNamed:@"cardFront.png"];
-    
     UIImageView *backView = [[UIImageView alloc] initWithFrame:self.bounds];
-    backView.image = [UIImage imageNamed:@"cardBack.png"];
+    
+    frontView.image = [UIImage imageNamed:@"Cards_Big_Blank.png"];
+    backView.image = [UIImage imageNamed:@"Cards_Big_Back"];
     
     [self insertSubview:frontView aboveSubview:self];
     [self insertSubview:backView aboveSubview:frontView];
@@ -85,6 +104,36 @@
     [self setupCardFront];
     
     self.isFaceup = NO;
+    self.imageBased = NO;
+    self.subviewsAreSetup = YES;
+    
+}
+
+- (void)setupImageSubviews
+{
+    //Initialize and add the "sides" of the card
+    UIImageView *frontView = [[UIImageView alloc] initWithFrame:self.bounds];
+    UIImageView *backView = [[UIImageView alloc] initWithFrame:self.bounds];
+    
+    if (self.isSmall)
+    {
+        frontView.image = [UIImage imageNamed:@"Cards_Small_Blank.png"];
+        backView.image = [UIImage imageNamed:@"Cards_Small_Back"];
+    }
+    else
+    {
+        frontView.image = [UIImage imageNamed:@"Cards_Big_Blank.png"];
+        backView.image = [UIImage imageNamed:@"Cards_Big_Back"];
+    }
+    
+    [self insertSubview:frontView aboveSubview:self];
+    [self insertSubview:backView aboveSubview:frontView];
+    
+    self.frontOfCardView = frontView;
+    self.backOfCardView = backView;
+    
+    self.isFaceup = NO;
+    self.imageBased = YES;
     self.subviewsAreSetup = YES;
     
 }
@@ -200,7 +249,6 @@
     
 }
 
-
 #pragma mark - Actions
 
 - (void)flipCard
@@ -262,7 +310,29 @@
 
 - (void)setRankAndSuitFromCard:(PokerCard *)card
 {
-    [self setRank:card.rank andSuit:[card suitAsUnicodeCharacter]];
+    if (self.imageBased)
+    {
+        NSString *imageName = @"Cards_";
+        if (self.isSmall) {
+            imageName = [imageName stringByAppendingString:@"Small_"];
+        }
+        else
+        {
+            imageName = [imageName stringByAppendingString:@"Big_"];
+        }
+        
+        imageName = [imageName stringByAppendingString:card.rank];
+        imageName = [imageName stringByAppendingString:card.suitAsInitial];
+        
+        imageName = [imageName stringByAppendingString:@".png"];
+        
+        self.frontOfCardView.image = [UIImage imageNamed:imageName];
+    }
+    
+    else
+    {
+        [self setRank:card.rank andSuit:[card suitAsUnicodeCharacter]];
+    }
 }
 
 - (void)setRank:(NSString *)rank andSuit:(NSString *)suit
@@ -285,6 +355,17 @@
     self.currentSuit = suit;
     
     [self updateSuitColor];
+    
+}
+
+- (void)makeLarge
+{
+    
+    [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    self.isSmall = NO;
+    
+    [self setupImageSubviews];
     
 }
 

@@ -27,6 +27,8 @@
 - (NSString *)bestHandAsString;
 - (NSString *)bestHandAsStringInitials;
 
+- (NSArray *)bestHandNetworkArray;
+
 typedef enum {
     Nothing = 0,
     HighCard = 1,

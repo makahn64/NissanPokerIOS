@@ -55,7 +55,7 @@
 		80143CB0196B10BE00B6CB88 /* PokerCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CAF196B10BE00B6CB88 /* PokerCard.m */; };
 		80143CB3196B10CD00B6CB88 /* PokerDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 80143CB2196B10CD00B6CB88 /* PokerDeck.m */; };
 		801C7FAB197DA96D009431B7 /* PokerHand.m in Sources */ = {isa = PBXBuildFile; fileRef = 801C7FAA197DA96D009431B7 /* PokerHand.m */; };
-		8046A9DB197730E500232B96 /* SubmitHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8046A9DA197730E500232B96 /* SubmitHandViewController.m */; };
+		8046A9DB197730E500232B96 /* InfoEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8046A9DA197730E500232B96 /* InfoEntryViewController.m */; };
 		8046A9DE1978326D00232B96 /* CrossfadeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8046A9DD1978326D00232B96 /* CrossfadeSegue.m */; };
 		80489B2919649E9900362A45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80489B2819649E9900362A45 /* Foundation.framework */; };
 		80489B2B19649E9900362A45 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80489B2A19649E9900362A45 /* CoreGraphics.framework */; };
@@ -74,9 +74,14 @@
 		805975391964B6F50066DAF9 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 805975381964B6F50066DAF9 /* WelcomeViewController.m */; };
 		8059753C1964B7080066DAF9 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059753B1964B7080066DAF9 /* LogInViewController.m */; };
 		8059753F1964B71E0066DAF9 /* QRScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059753E1964B71E0066DAF9 /* QRScannerViewController.m */; };
+		807998CA19A7A76800C31F02 /* NissanProBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 807998C819A7A76800C31F02 /* NissanProBold.otf */; };
+		807998CB19A7A76800C31F02 /* NissanProMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 807998C919A7A76800C31F02 /* NissanProMedium.otf */; };
+		807998CE19A7AD1400C31F02 /* NissanPoker.dat in Resources */ = {isa = PBXBuildFile; fileRef = 807998CC19A7AD1400C31F02 /* NissanPoker.dat */; };
+		807998CF19A7AD1400C31F02 /* NissanPoker.xml in Resources */ = {isa = PBXBuildFile; fileRef = 807998CD19A7AD1400C31F02 /* NissanPoker.xml */; };
+		8079991019AE3A9D00C31F02 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8079990F19AE3A9D00C31F02 /* Customer.m */; };
 		808D4CCC198833F6002A0268 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 808D4CCB198833F6002A0268 /* Images.xcassets */; };
-		808D4CCF198FEF7C002A0268 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 808D4CCE198FEF7C002A0268 /* Customer.m */; };
 		808D4CD51990423E002A0268 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 808D4CD41990423E002A0268 /* IntroViewController.m */; };
+		80C670C3199E903E0016F47A /* FinalHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C670C2199E903E0016F47A /* FinalHandViewController.m */; };
 		80C6E83A196F14FB0007BEA2 /* PlayingCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C6E839196F14FB0007BEA2 /* PlayingCardView.m */; };
 		80E4E0D119661FE200780922 /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E4E0D019661FE200780922 /* AdminViewController.m */; };
 		BADD0FC1BD8E4F58A82D9CB9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0495A8A1584BB58D427942 /* libPods.a */; };
@@ -203,8 +208,8 @@
 		80143CB2196B10CD00B6CB88 /* PokerDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerDeck.m; sourceTree = "<group>"; };
 		801C7FA9197DA96D009431B7 /* PokerHand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerHand.h; sourceTree = "<group>"; };
 		801C7FAA197DA96D009431B7 /* PokerHand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerHand.m; sourceTree = "<group>"; };
-		8046A9D9197730E500232B96 /* SubmitHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitHandViewController.h; sourceTree = "<group>"; };
-		8046A9DA197730E500232B96 /* SubmitHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitHandViewController.m; sourceTree = "<group>"; };
+		8046A9D9197730E500232B96 /* InfoEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoEntryViewController.h; sourceTree = "<group>"; };
+		8046A9DA197730E500232B96 /* InfoEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoEntryViewController.m; sourceTree = "<group>"; };
 		8046A9DC1978326D00232B96 /* CrossfadeSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossfadeSegue.h; sourceTree = "<group>"; };
 		8046A9DD1978326D00232B96 /* CrossfadeSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossfadeSegue.m; sourceTree = "<group>"; };
 		80489B2519649E9900362A45 /* Nissan Poker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nissan Poker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,11 +236,17 @@
 		8059753B1964B7080066DAF9 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		8059753D1964B71E0066DAF9 /* QRScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRScannerViewController.h; sourceTree = "<group>"; };
 		8059753E1964B71E0066DAF9 /* QRScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRScannerViewController.m; sourceTree = "<group>"; };
+		807998C819A7A76800C31F02 /* NissanProBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NissanProBold.otf; path = "../../../App Assets & Comps/NissanPoker/App/Fonts/NissanProBold.otf"; sourceTree = "<group>"; };
+		807998C919A7A76800C31F02 /* NissanProMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NissanProMedium.otf; path = "../../../App Assets & Comps/NissanPoker/App/Fonts/NissanProMedium.otf"; sourceTree = "<group>"; };
+		807998CC19A7AD1400C31F02 /* NissanPoker.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = NissanPoker.dat; sourceTree = "<group>"; };
+		807998CD19A7AD1400C31F02 /* NissanPoker.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = NissanPoker.xml; sourceTree = "<group>"; };
+		8079990E19AE3A9D00C31F02 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Customer.h; path = NissanPoker/Customer.h; sourceTree = "<group>"; };
+		8079990F19AE3A9D00C31F02 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Customer.m; path = NissanPoker/Customer.m; sourceTree = "<group>"; };
 		808D4CCB198833F6002A0268 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		808D4CCD198FEF7C002A0268 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Customer.h; path = NissanPoker/Customer.h; sourceTree = "<group>"; };
-		808D4CCE198FEF7C002A0268 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Customer.m; path = NissanPoker/Customer.m; sourceTree = "<group>"; };
 		808D4CD31990423E002A0268 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		808D4CD41990423E002A0268 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		80C670C1199E903E0016F47A /* FinalHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalHandViewController.h; sourceTree = "<group>"; };
+		80C670C2199E903E0016F47A /* FinalHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalHandViewController.m; sourceTree = "<group>"; };
 		80C6E838196F14FB0007BEA2 /* PlayingCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardView.h; sourceTree = "<group>"; };
 		80C6E839196F14FB0007BEA2 /* PlayingCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardView.m; sourceTree = "<group>"; };
 		80E4E0CF19661FE200780922 /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
@@ -391,6 +402,8 @@
 		1ED362A01985C17C00D29B0F /* ImageTargets */ = {
 			isa = PBXGroup;
 			children = (
+				807998CC19A7AD1400C31F02 /* NissanPoker.dat */,
+				807998CD19A7AD1400C31F02 /* NissanPoker.xml */,
 				804EF4AD1999367E000B6B34 /* NissanPokerProto.dat */,
 				804EF4AE1999367E000B6B34 /* NissanPokerProto.xml */,
 				1ED362A11985C17C00D29B0F /* IT_about.html */,
@@ -410,12 +423,12 @@
 			isa = PBXGroup;
 			children = (
 				80143CA2196B061600B6CB88 /* NissanPokerModel.xcdatamodeld */,
+				8079990E19AE3A9D00C31F02 /* Customer.h */,
+				8079990F19AE3A9D00C31F02 /* Customer.m */,
 				1EA10D29196DE59100367DE6 /* PlayingCard.h */,
 				1EA10D2A196DE59100367DE6 /* PlayingCard.m */,
 				1EA10D26196DE49900367DE6 /* PlayingCard+WithInterface.h */,
 				1EA10D27196DE49900367DE6 /* PlayingCard+WithInterface.m */,
-				808D4CCD198FEF7C002A0268 /* Customer.h */,
-				808D4CCE198FEF7C002A0268 /* Customer.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -475,14 +488,14 @@
 				80C6E839196F14FB0007BEA2 /* PlayingCardView.m */,
 				805975371964B6F50066DAF9 /* WelcomeViewController.h */,
 				805975381964B6F50066DAF9 /* WelcomeViewController.m */,
-				808D4CD31990423E002A0268 /* IntroViewController.h */,
-				808D4CD41990423E002A0268 /* IntroViewController.m */,
+				8046A9D9197730E500232B96 /* InfoEntryViewController.h */,
+				8046A9DA197730E500232B96 /* InfoEntryViewController.m */,
 				8059753D1964B71E0066DAF9 /* QRScannerViewController.h */,
 				8059753E1964B71E0066DAF9 /* QRScannerViewController.m */,
 				1E91BF301987F07A0037CBD0 /* ARScannerViewController.h */,
 				1E91BF311987F07A0037CBD0 /* ARScannerViewController.mm */,
-				8046A9D9197730E500232B96 /* SubmitHandViewController.h */,
-				8046A9DA197730E500232B96 /* SubmitHandViewController.m */,
+				80C670C1199E903E0016F47A /* FinalHandViewController.h */,
+				80C670C2199E903E0016F47A /* FinalHandViewController.m */,
 				80E4E0CF19661FE200780922 /* AdminViewController.h */,
 				80E4E0D019661FE200780922 /* AdminViewController.m */,
 				80143CAB196B0EF900B6CB88 /* PokerPlayer.h */,
@@ -495,7 +508,10 @@
 				801C7FAA197DA96D009431B7 /* PokerHand.m */,
 				8059753A1964B7080066DAF9 /* LogInViewController.h */,
 				8059753B1964B7080066DAF9 /* LogInViewController.m */,
+				808D4CD31990423E002A0268 /* IntroViewController.h */,
+				808D4CD41990423E002A0268 /* IntroViewController.m */,
 				808D4CCB198833F6002A0268 /* Images.xcassets */,
+				807998C719A7A72700C31F02 /* Fonts */,
 				80489B2F19649E9900362A45 /* Supporting Files */,
 			);
 			path = NissanPoker;
@@ -528,6 +544,15 @@
 				80489B5019649E9900362A45 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		807998C719A7A72700C31F02 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				807998C819A7A76800C31F02 /* NissanProBold.otf */,
+				807998C919A7A76800C31F02 /* NissanProMedium.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -615,9 +640,12 @@
 				1ED362B51985C17C00D29B0F /* NSPoker.dat in Resources */,
 				1ED362BB1985C17C00D29B0F /* Tarmac.dat in Resources */,
 				808D4CCC198833F6002A0268 /* Images.xcassets in Resources */,
+				807998CE19A7AD1400C31F02 /* NissanPoker.dat in Resources */,
 				1ED362681985C14100D29B0F /* Simple.vertsh in Resources */,
+				807998CA19A7A76800C31F02 /* NissanProBold.otf in Resources */,
 				1ED362C01985C17C00D29B0F /* TextureTeapotGreen.png in Resources */,
 				1ED362B61985C17C00D29B0F /* NSPoker.xml in Resources */,
+				807998CB19A7A76800C31F02 /* NissanProMedium.otf in Resources */,
 				1ED362C11985C17C00D29B0F /* TextureTeapotNeon.png in Resources */,
 				1ED362651985C14100D29B0F /* Line.fragsh in Resources */,
 				1ED362C31985C17C00D29B0F /* TextureTeapotYellow.png in Resources */,
@@ -635,6 +663,7 @@
 				1ED362C21985C17C00D29B0F /* TextureTeapotRed.png in Resources */,
 				1ED362BA1985C17C00D29B0F /* StonesAndChips.xml in Resources */,
 				1ED362B21985C17C00D29B0F /* building_texture.jpeg in Resources */,
+				807998CF19A7AD1400C31F02 /* NissanPoker.xml in Resources */,
 				1ED362BE1985C17C00D29B0F /* TextureTeapotBlue.png in Resources */,
 				80489B3319649E9900362A45 /* InfoPlist.strings in Resources */,
 				80489B3C19649E9900362A45 /* Main.storyboard in Resources */,
@@ -699,14 +728,15 @@
 				1ED362621985C14100D29B0F /* ADQCARApplicationSession.mm in Sources */,
 				805975391964B6F50066DAF9 /* WelcomeViewController.m in Sources */,
 				80143CAD196B0EF900B6CB88 /* PokerPlayer.m in Sources */,
-				808D4CCF198FEF7C002A0268 /* Customer.m in Sources */,
 				80143CA4196B061600B6CB88 /* NissanPokerModel.xcdatamodeld in Sources */,
+				8079991019AE3A9D00C31F02 /* Customer.m in Sources */,
+				80C670C3199E903E0016F47A /* FinalHandViewController.m in Sources */,
 				8059753F1964B71E0066DAF9 /* QRScannerViewController.m in Sources */,
 				1ED362631985C14100D29B0F /* ADQCARShaderUtils.m in Sources */,
 				80143CB3196B10CD00B6CB88 /* PokerDeck.m in Sources */,
 				1EA10D28196DE49900367DE6 /* PlayingCard+WithInterface.m in Sources */,
 				1ED362C81985C20600D29B0F /* ADQCARImageTargetsEAGLView.mm in Sources */,
-				8046A9DB197730E500232B96 /* SubmitHandViewController.m in Sources */,
+				8046A9DB197730E500232B96 /* InfoEntryViewController.m in Sources */,
 				1ED362611985C14100D29B0F /* ADQCAR3DModel.m in Sources */,
 				8059753C1964B7080066DAF9 /* LogInViewController.m in Sources */,
 				1E91BF321987F07A0037CBD0 /* ARScannerViewController.mm in Sources */,
@@ -781,7 +811,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -805,6 +835,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "B0044476-F053-4568-8BF4-D6EB0C03534B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
@@ -828,7 +859,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Helios Interactive Technologies Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Helios Interactive Technologies Inc.";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -845,6 +877,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "";
+				PROVISIONING_PROFILE = "B0044476-F053-4568-8BF4-D6EB0C03534B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
@@ -957,6 +990,99 @@
 			};
 			name = Release;
 		};
+		80E4EA521999632400F17518 /* InHouse */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Helios Interactive Technologies Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Helios Interactive Technologies Inc.";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "";
+				PROVISIONING_PROFILE = "B0044476-F053-4568-8BF4-D6EB0C03534B";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = InHouse;
+		};
+		80E4EA531999632400F17518 /* InHouse */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AC9775DC8DE441D85E48C71 /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NissanPoker/Nissan Poker-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/SVProgressHUD\"",
+					"${PROJECT_DIR}",
+				);
+				INFOPLIST_FILE = "NissanPoker/Nissan Poker-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QCAR",
+				);
+				PRODUCT_NAME = "Nissan Poker";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = InHouse;
+		};
+		80E4EA541999632400F17518 /* InHouse */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NissanPoker.app/NissanPoker";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NissanPoker/NissanPoker-Prefix.pch";
+				INFOPLIST_FILE = "NissanPokerTests/Nissan PokerTests-Info.plist";
+				PRODUCT_NAME = "Nissan PokerTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = InHouse;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -965,6 +1091,7 @@
 			buildConfigurations = (
 				80489B5519649E9900362A45 /* Debug */,
 				80489B5619649E9900362A45 /* Release */,
+				80E4EA521999632400F17518 /* InHouse */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -974,6 +1101,7 @@
 			buildConfigurations = (
 				80489B5819649E9900362A45 /* Debug */,
 				80489B5919649E9900362A45 /* Release */,
+				80E4EA531999632400F17518 /* InHouse */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -983,6 +1111,7 @@
 			buildConfigurations = (
 				80489B5B19649E9900362A45 /* Debug */,
 				80489B5C19649E9900362A45 /* Release */,
+				80E4EA541999632400F17518 /* InHouse */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

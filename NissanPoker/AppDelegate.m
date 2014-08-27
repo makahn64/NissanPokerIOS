@@ -28,7 +28,10 @@
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunchedBefore"]){
     
+        [[NSUserDefaults standardUserDefaults] setObject:@"http://node.appdelegates.net:8003" forKey:@"leaderboardAddress"];
+        [[NSUserDefaults standardUserDefaults] setInteger:10 forKey:@"timeout"];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"QRScanningEnabled"];
+        [[NSUserDefaults standardUserDefaults] setInteger:NV200 forKey:@"targetVehicle"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunchedBefore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -75,7 +78,7 @@
 
 #pragma mark - Player Gets and Saves
 
-- (void)addCurentCustomerToCoreDataFinished:(BOOL)finishedGame{
+- (void)addCurentCustomerToCoreData{
     
     Customer *newCustomer = [NSEntityDescription
                                     insertNewObjectForEntityForName:@"Customer"
@@ -84,11 +87,17 @@
     newCustomer.firstName = self.currentPlayer.firstName;
     newCustomer.lastName = self.currentPlayer.lastName;
     newCustomer.createdTime = [NSNumber numberWithDouble: self.currentPlayer.timeStartedGame];
-    newCustomer.finishedGame = [NSNumber numberWithBool:NO];
+    newCustomer.finishedGame = [NSNumber numberWithBool: self.currentPlayer.finished];
+    newCustomer.abandonedGame = [NSNumber numberWithBool:self.currentPlayer.abandoned];
     newCustomer.uploaded = [NSNumber numberWithBool:NO];
     newCustomer.handValue = [NSNumber numberWithInt:self.currentPlayer.pokerHand.handValue];
+    newCustomer.handDescription = self.currentPlayer.pokerHand.handDescription;
     
-    for (PokerCard *card in self.currentPlayer.pokerHand.hand){
+    newCustomer.gameDuration = [NSNumber numberWithDouble: self.currentPlayer.gameDuration];
+    newCustomer.deviceID = self.currentPlayer.deviceId;
+    newCustomer.vehicle = self.currentPlayer.vehicle;
+    
+    for (PokerCard *card in self.currentPlayer.pokerHand.bestFiveCardHand){
         PlayingCard *newCDCard = [PlayingCard playingCardFromPokerCard:card];
         [newCustomer addPokerHandObject:newCDCard];
     }
@@ -179,6 +188,18 @@
     }
     
     return _persistentStoreCoordinator;
+}
+
+#pragma mark - Custom Colors and Fonts
+
++ (UIColor *)nissanRed
+{
+    return [UIColor colorWithRed:0.77647f green:0.08627f blue:0.2f alpha:1.0f];
+}
+
++ (UIColor *)nissanGrey
+{
+    return [UIColor colorWithRed:0.30588f green:0.30588f blue:0.30588f alpha:1.0f];
 }
 
 @end

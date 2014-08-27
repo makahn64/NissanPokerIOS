@@ -30,6 +30,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    /* This code prints all available fonts
+    for(NSString *fontfamilyname in [UIFont familyNames])
+    {
+        NSLog(@"Family:'%@'",fontfamilyname);
+        for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+        {
+            NSLog(@"\tfont:'%@'",fontName);
+        }
+        NSLog(@"~~~~~~~~");
+    }
+    */
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,26 +55,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.continueLabel.alpha = 0.0;
-    //self.tapGestureRecognizer.enabled = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
     [super viewDidAppear:animated];
-    
-    
-    [UIView animateWithDuration:.75
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         self.continueLabel.alpha = 1.0;
-                         
-                     }
-                     completion:^(BOOL finished) {
-                         //self.tapGestureRecognizer.enabled = YES;
-                     }];
 }
 
 #pragma mark - Actions

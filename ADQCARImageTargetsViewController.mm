@@ -306,7 +306,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 // Probably useless for generic
 - (bool) doLoadTrackersData {
     
-    dataSetNew = [self loadImageTrackerDataSet:@"NissanPokerProto.xml"];
+    dataSetNew = [self loadImageTrackerDataSet:@"NissanPoker.xml"];
 
     if ( dataSetNew == NULL ) {
         NSLog(@"Failed to load dataset");

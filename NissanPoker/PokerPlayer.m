@@ -22,6 +22,8 @@
         double timeStartedDecimal = round( [[NSDate date] timeIntervalSince1970] );
         self.timeStartedGame = (int) timeStartedDecimal;
         
+        self.deviceId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        
         self.deck = [[PokerDeck alloc] init];
         self.pokerHand = [[PokerHand alloc] init];
     }

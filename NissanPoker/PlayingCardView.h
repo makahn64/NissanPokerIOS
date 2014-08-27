@@ -12,6 +12,8 @@
 
 @property (nonatomic) BOOL isFaceup;
 
+- (id)initWithFrame:(CGRect)frame andIsSmall:(BOOL)small;
+
 - (void)flipCard;
 - (void)flipCardAnimated;
 - (void)flipCardAnimatedwithCompletion:(void(^)(void))afterFlip;
@@ -20,5 +22,7 @@
 - (void)setRank:(NSString *)rank andSuit:(NSString *)suit;
 - (void)setRank:(NSString *)rank;
 - (void)setSuit:(NSString *)suit;
+
+- (void)makeLarge;
 
 @end

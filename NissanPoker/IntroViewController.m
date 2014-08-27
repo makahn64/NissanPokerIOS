@@ -40,6 +40,7 @@
     
     BOOL qrEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"QRScanningEnabled"];
     
+    //TODO: fix segues or remove this controller
     if (qrEnabled) {
         [self performSegueWithIdentifier:@"toQRfromIntro" sender:self];
     }

@@ -2,7 +2,7 @@
 //  Customer.m
 //  Nissan Poker
 //
-//  Created by Jasper Kahn on 8/4/14.
+//  Created by Jasper Kahn on 8/27/14.
 //  Copyright (c) 2014 AppDelegates. All rights reserved.
 //
 
@@ -12,13 +12,17 @@
 
 @implementation Customer
 
+@dynamic abandonedGame;
 @dynamic createdTime;
-@dynamic emailAddress;
+@dynamic deviceID;
 @dynamic finishedGame;
 @dynamic firstName;
+@dynamic gameDuration;
+@dynamic handDescription;
+@dynamic handValue;
 @dynamic lastName;
 @dynamic uploaded;
-@dynamic handValue;
+@dynamic vehicle;
 @dynamic pokerHand;
 
 @end

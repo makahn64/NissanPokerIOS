@@ -7,7 +7,7 @@
 //
 
 #import "QRScannerViewController.h"
-#import "SubmitHandViewController.h"
+#import "InfoEntryViewController.h"
 #import "PlayingCard+WithInterface.h"
 #import "PlayingCardView.h"
 #import "PokerHand.h"
@@ -17,7 +17,11 @@
 
 @interface QRScannerViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *infoPopupView;
+@property (weak, nonatomic) IBOutlet UIImageView *bannerView;
+
+@property (weak, nonatomic) IBOutlet UIView *popupView;
+@property (weak, nonatomic) IBOutlet UIImageView *infoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *hintLabel;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
 @property (weak, nonatomic) IBOutlet PlayingCardView *bigPlayingCard;
@@ -33,6 +37,7 @@
 @property (strong, nonatomic) AVCaptureMetadataOutput *captureMetadataOutput;
 
 @property (strong, nonatomic) NSMutableArray *validQRTargetValues;
+@property (strong, nonatomic) NSMutableDictionary *remainingHints;
 
 @end
 
@@ -44,15 +49,50 @@
 
 + (NSArray *)getValidQRTargetValues
 {
-    return @[@"NissanPokerTarget1",
-             @"NissanPokerTarget2",
-             @"NissanPokerTarget3",
-             @"NissanPokerTarget4",
-             @"NissanPokerTarget5",
-             @"NissanPokerTarget6",
-             @"NissanPokerTarget7"];
+    return @[@"Target_1",
+             @"Target_2",
+             @"Target_3",
+             @"Target_4",
+             @"Target_5",
+             @"Target_6",
+             @"Target_7",
+             @"Target_8",
+             @"Target_9",
+             @"Target_10",
+             @"Target_11",
+             @"Target_12",
+             @"Target_13",
+             @"Target_14",
+             @"Target_15",
+             @"Target_16",
+             @"Target_17",
+             @"Target_18"];
 }
 
+
++ (NSDictionary *)getHints
+{
+    return @{@"Target_1" : @"Load the rear cabin without any hassle, we're flexible.",
+             @"Target_2" : @"You can quickly and safely load the van from either side.",
+             @"Target_3" : @"A great curb-to-curb turning radius is my specialty.",
+             @"Target_4" : @"We can open wide for unobstructed loading.",
+             @"Target_5" : @"Compact van? Loading cargo feels more like a full-size cargo van.",
+             @"Target_6" : @"This is when your cargo says, \"Doors? What doors?\"",
+             @"Target_7" : @"Flat load plywood or a couple pallets of cargo...I got this.",
+             @"Target_8" : @"An early start or a long day, we brighten your whole day.",
+             @"Target_9" : @"Powered mobile office...got it!",
+             @"Target_10" : @"I can charge your power tools anytime.",
+             @"Target_11" : @"Sometimes you need to think inside the box.",
+             @"Target_12" : @"There is no doubt you will stop when you need to.",
+             @"Target_13" : @"Safety...check!",
+             @"Target_14" : @"Stop crouching and stand up!",
+             @"Target_15" : @"We're here to help strap down those heavy packages.",
+             @"Target_16" : @"Installing shelves, cabinets and racks are no problem with these.",
+             @"Target_17" : @"Is it a seat or a desk?...What is your preference?",
+             @"Target_18" : @"A fully organized mobile office at your fingertips."};
+}
+
+ 
 #pragma mark - Life Cycle of View
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,13 +108,14 @@
 {
     [super viewDidLoad];
     
-    [AppDelegate sharedAppDelegate].currentPlayer = [[PokerPlayer alloc] init];
-    
     [self setupCardViews];
     [self setupVideoCaptureSession];
     
     //Setup the valid target array
     self.validQRTargetValues = [NSMutableArray arrayWithArray:[QRScannerViewController getValidQRTargetValues]];
+    self.remainingHints = [NSMutableDictionary dictionaryWithDictionary:[QRScannerViewController getHints]];
+    
+    [self.bigPlayingCard makeLarge];
     
     [self setupPopupViews];
     
@@ -100,8 +141,8 @@
     
     for (int i = 0; i < 7; i++)
     {
-        CGRect newCardFrame = CGRectMake(0, 0, 40, 56);
-        PlayingCardView *newCard = [[PlayingCardView alloc] initWithFrame:newCardFrame];
+        CGRect newCardFrame = CGRectMake(0, 0, 82, 115);
+        PlayingCardView *newCard = [[PlayingCardView alloc] initWithFrame:newCardFrame andIsSmall:YES];
         
         [self.handCardViews addObject:newCard];
     }
@@ -119,17 +160,17 @@
     
     //Get the device we're scanning from
     self.captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    //NSArray *availDevices = [AVCaptureDevice devices];
     
     //Assign the device to the input object
     self.captureInput = [AVCaptureDeviceInput deviceInputWithDevice:self.captureDevice error:&error];
     
+    
     if (!self.captureInput) {
         NSLog(@"%@", [error localizedDescription]);
-        //TODO Look at NSAssert
+        //TODO: Look at NSAssert
     }
-    else
-    {
+    
+    else {
         //Put the input through a seesion
         self.captureSession = [[AVCaptureSession alloc] init];
         [self.captureSession addInput:self.captureInput];
@@ -157,21 +198,28 @@
         connection = [self.videoPreviewLayer connection];
         [connection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
         
-        CGRect visiblePreviewRegion = CGRectMake(0, 0, 627, 768);
+        CGRect visiblePreviewRegion = CGRectMake(0, 0, 1024, 768);
         CGRect metaDataInterestRect = [self.videoPreviewLayer metadataOutputRectOfInterestForRect:visiblePreviewRegion];
         self.captureMetadataOutput.rectOfInterest = metaDataInterestRect;
         
-        [_captureSession startRunning];
+        [self.captureSession startRunning];
     }
     
 }
 
 - (void)setupPopupViews
 {
-    self.infoPopupView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+    self.popupView.transform = CGAffineTransformMakeScale(0.0, 0.0);
     self.continueButton.alpha = 0.0;
 }
 
+#pragma mark - Random hint method
+
+- (NSString *)getRandomHint
+{
+    NSArray *keys = self.remainingHints.allKeys;
+    return self.remainingHints[keys[arc4random_uniform((int)keys.count)]];
+}
 
 #pragma mark - CollectionView Data Source Methods
 
@@ -185,7 +233,6 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"playingCardCell" forIndexPath:indexPath];
     
     PlayingCardView *cardView = self.handCardViews[indexPath.row];
-    //[cardView setFrame:cell.bounds];
     [cell addSubview:cardView];
     
     return cell;
@@ -208,17 +255,21 @@
             {
                 NSLog(@"Read %@", [metadataObj stringValue]);
                 
+                [self.remainingHints removeObjectForKey:[metadataObj stringValue]];
+                
+                [self.validQRTargetValues removeObject: [metadataObj stringValue] ];
+                [self.captureSession stopRunning];
+                
                 [self performSelectorOnMainThread:@selector(alertQRScanned:)
                                        withObject:[metadataObj stringValue]
                                     waitUntilDone:NO];
                 
-                [self.validQRTargetValues removeObject: [metadataObj stringValue] ];
-                [self.captureSession stopRunning];
             }
             
         }
 
     }
+    
 }
 
 - (void)alertQRScanned:(NSString *)qrMessage
@@ -226,60 +277,48 @@
     
     PokerCard *newCard = [[AppDelegate sharedAppDelegate] dealCard];
     
-    [self displayCard: newCard];
+    [self displayCard: newCard withTarget:qrMessage];
     
 }
 
-- (void)displayCard:(PokerCard *)baseCard
+- (void)displayCard:(PokerCard *)baseCard withTarget:(NSString *)targetName
 {
+    self.infoImageView.image = [UIImage imageNamed:[targetName stringByAppendingString:@"_Info"]];
+    
+    NSMutableAttributedString *hintText = [[NSMutableAttributedString alloc] initWithString:[@"Next Stop: " stringByAppendingString:[self getRandomHint]] ];
+    [hintText addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanRed] range:NSMakeRange(0, 10)];
+    [hintText addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanGrey] range:NSMakeRange(11, hintText.length - 1)];
+    
+    self.hintLabel.attributedText = hintText;
+    
+    [UIView transitionWithView:self.bannerView
+                      duration:1.0
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.bannerView.image = [UIImage imageNamed:@"Top"];
+                    } completion:nil];
+    
     [UIView animateWithDuration:1.0
                      animations:^{
-                         self.infoPopupView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         self.popupView.transform = CGAffineTransformMakeScale(1.0, 1.0);
                      }
-     ];
-    
-    if (self.bigPlayingCard.isFaceup)
-    {
-        [self.bigPlayingCard flipCardAnimatedwithCompletion:^{
-            
-            [self.bigPlayingCard setRankAndSuitFromCard:baseCard];
-            PlayingCardView *miniCard = [self getNextUnflippedCard];
-            [miniCard setRankAndSuitFromCard:baseCard];
-            
-            [miniCard flipCardAnimated];
-            [self.bigPlayingCard flipCardAnimatedwithCompletion:^{
-                
-                [UIView animateWithDuration:1.0
-                                 animations:^{
-                                     self.continueButton.alpha = 1.0;
-                                 }
-                 ];
-                
-                //[self displayCodeScannedAlertView:baseCard];
-                
-            }];
-        }];
-        
-    }
-    else
-    {
-        
-        [self.bigPlayingCard setRankAndSuitFromCard:baseCard];
-        PlayingCardView *miniCard = [self getNextUnflippedCard];
-        [miniCard setRankAndSuitFromCard:baseCard];
-        
-        [miniCard flipCardAnimated];
-        [self.bigPlayingCard flipCardAnimatedwithCompletion:^{
-            
-            [UIView animateWithDuration:1.0
-                             animations:^{
-                                 self.continueButton.alpha = 1.0;
-                             }
-             ];
-            
-        }];
-        
-    }
+                     completion:^(BOOL finished) {
+                         [self.bigPlayingCard setRankAndSuitFromCard:baseCard];
+                         PlayingCardView *miniCard = [self getNextUnflippedCard];
+                         [miniCard setRankAndSuitFromCard:baseCard];
+                         
+                         [miniCard flipCardAnimated];
+                         [self.bigPlayingCard flipCardAnimatedwithCompletion:^{
+                             
+                             [UIView animateWithDuration:1.0
+                                              animations:^{
+                                                  self.continueButton.alpha = 1.0;
+                                              }
+                              ];
+                             
+                         }];
+
+                     }];
     
 }
 
@@ -299,27 +338,33 @@
 
 - (IBAction)continueTapped:(id)sender {
     
-    if ([self.validQRTargetValues count] > 0)
+    if ([[AppDelegate sharedAppDelegate].currentPlayer.pokerHand.hand count] < 7)
     {
-        [self.bigPlayingCard flipCardAnimated];
+        [UIView transitionWithView:self.bannerView
+                          duration:.75
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            self.bannerView.image = [UIImage imageNamed:@"TopChip"];
+                        } completion:nil];
+        
         [UIView animateWithDuration:.75
                          animations:^{
                              self.continueButton.alpha = 0.0;
-                             self.infoPopupView.alpha = 0.0;
+                             self.popupView.alpha = 0.0;
                          }
                          completion:^(BOOL finished) {
-                             self.infoPopupView.transform = CGAffineTransformMakeScale(0.0, 0.0);
-                             self.infoPopupView.alpha = 1.0;
+                             self.popupView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+                             self.popupView.alpha = 1.0;
+                             [self.bigPlayingCard flipCard];
                              [self.captureSession startRunning];
                              
-                         }
-         ];
-        //[self.captureSession startRunning];
+                         }];
+        
     }
     
     else
     {
-        [self performSegueWithIdentifier:@"toSubmitFromQR" sender:self];
+        [self performSegueWithIdentifier:@"toFinalFromQR" sender:self];
     }
 
 }
@@ -351,7 +396,7 @@
                 
             }
             
-            [self performSegueWithIdentifier:@"toSubmitFromQR" sender:self];
+            [self performSegueWithIdentifier:@"toFinalFromQR" sender:self];
             
         }
         
