@@ -134,6 +134,22 @@
     ad.currentPlayer.firstName = self.firstNameTextField.text;
     ad.currentPlayer.lastName = self.lastNameTextField.text;
     
+    switch ([[NSUserDefaults standardUserDefaults] integerForKey:@"vehicle"]) {
+        case NV200:
+            ad.currentPlayer.vehicle = @"NV200";
+            break;
+        case NV_CARGO_STANDARD:
+            ad.currentPlayer.vehicle = @"NV Cargo Standard";
+            break;
+        case NV_CARGO_HIGH_ROOF:
+            ad.currentPlayer.vehicle = @"NV Cargo High Roof";
+            break;
+            
+        default:
+            ad.currentPlayer.vehicle = @"Error, yo";
+            break;
+    }
+    
     BOOL qrEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"QRScanningEnabled"];
     
     if (qrEnabled) {

@@ -386,7 +386,7 @@
 */
 - (IBAction)changeIP:(id)sender {
     
-    NSString *message = @"Please enter the new address.\nONLY CHANGE THIS IF YOU KNOW WHAT YOU ARE DOING.\n\n Include \"http://\".";
+    NSString *message = @"Please enter the new address.\n\nONLY CHANGE THIS IF YOU KNOW WHAT YOU ARE DOING.";
     
     UIAlertView *changeIPAlert = [[UIAlertView alloc] initWithTitle:@"Leaderboard Address"
                                                             message:message

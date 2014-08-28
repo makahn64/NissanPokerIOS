@@ -199,7 +199,7 @@
 
 + (UIColor *)nissanGrey
 {
-    return [UIColor colorWithRed:0.30588f green:0.30588f blue:0.30588f alpha:1.0f];
+    return [UIColor colorWithRed:0.30196f green:0.30196f blue:0.30196f alpha:1.0f];
 }
 
 @end

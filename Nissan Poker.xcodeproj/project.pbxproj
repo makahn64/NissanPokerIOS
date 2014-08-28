@@ -605,7 +605,7 @@
 				ORGANIZATIONNAME = AppDelegates;
 				TargetAttributes = {
 					80489B2419649E9900362A45 = {
-						DevelopmentTeam = 7RZ42XBYQH;
+						DevelopmentTeam = QZ4WGM5W5Z;
 					};
 					80489B4519649E9900362A45 = {
 						TestTargetID = 80489B2419649E9900362A45;

@@ -119,64 +119,64 @@
             return @{@"Target_1" : @"Load the rear cabin without any hassle, we're flexible.",
                      @"Target_2" : @"You can quickly and safely load the van from either side.",
                      @"Target_3" : @"A great curb-to-curb turning radius is my specialty.",
-                     @"Target_4" : @"We can open wide for unobstructed loading.",
+                     @"Target_4" : @"We can open wide for unobstructed loading.\n ",
                      @"Target_5" : @"Compact van? Loading cargo feels more like a full-size cargo van.",
                      @"Target_15" : @"We're here to help strap down those heavy packages.",
                      @"Target_16" : @"Installing shelves, cabinets and racks are no problem with these.",
                      @"Target_17" : @"Is it a seat or a desk?...What is your preference?",
-                     @"Target_18" : @"A fully organized mobile office at your fingertips."};
+                     @"Target_18" : @"A fully organized mobile office at your fingertips.\n "};
             break;
             
         case NV_CARGO_STANDARD:
             return @{@"Target_6" : @"This is when your cargo says, \"Doors? What doors?\"",
                      @"Target_7" : @"Flat load plywood or a couple pallets of cargo...I got this.",
                      @"Target_8" : @"An early start or a long day, we brighten your whole day.",
-                     @"Target_9" : @"Powered mobile office...got it!",
-                     @"Target_10" : @"I can charge your power tools anytime.",
-                     @"Target_11" : @"Sometimes you need to think inside the box.",
-                     @"Target_12" : @"There is no doubt you will stop when you need to.",
-                     @"Target_13" : @"Safety...check!",
+                     @"Target_9" : @"Powered mobile office...got it!\n ",
+                     @"Target_10" : @"I can charge your power tools anytime.\n ",
+                     @"Target_11" : @"Sometimes you need to think inside the box.\n ",
+                     @"Target_12" : @"There is no doubt you will stop when you need to.\n ",
+                     @"Target_13" : @"Safety...check!\n \n ",
                      @"Target_15" : @"We're here to help strap down those heavy packages.",
                      @"Target_16" : @"Installing shelves, cabinets and racks are no problem with these.",
                      @"Target_17" : @"Is it a seat or a desk?...What is your preference?",
-                     @"Target_18" : @"A fully organized mobile office at your fingertips."};
+                     @"Target_18" : @"A fully organized mobile office at your fingertips.\n "};
             break;
             
         case NV_CARGO_HIGH_ROOF:
             return @{@"Target_6" : @"This is when your cargo says, \"Doors? What doors?\"",
                      @"Target_7" : @"Flat load plywood or a couple pallets of cargo...I got this.",
                      @"Target_8" : @"An early start or a long day, we brighten your whole day.",
-                     @"Target_9" : @"Powered mobile office...got it!",
-                     @"Target_10" : @"I can charge your power tools anytime.",
-                     @"Target_11" : @"Sometimes you need to think inside the box.",
-                     @"Target_12" : @"There is no doubt you will stop when you need to.",
-                     @"Target_13" : @"Safety...check!",
-                     @"Target_14" : @"Stop crouching and stand up!",
+                     @"Target_9" : @"Powered mobile office...got it!\n ",
+                     @"Target_10" : @"I can charge your power tools anytime.\n ",
+                     @"Target_11" : @"Sometimes you need to think inside the box.\n ",
+                     @"Target_12" : @"There is no doubt you will stop when you need to.\n ",
+                     @"Target_13" : @"Safety...check!\n \n ",
+                     @"Target_14" : @"Stop crouching and stand up!\n ",
                      @"Target_15" : @"We're here to help strap down those heavy packages.",
                      @"Target_16" : @"Installing shelves, cabinets and racks are no problem with these.",
                      @"Target_17" : @"Is it a seat or a desk?...What is your preference?",
-                     @"Target_18" : @"A fully organized mobile office at your fingertips."};
+                     @"Target_18" : @"A fully organized mobile office at your fingertips.\n "};
             break;
             
         default:
             return @{@"Target_1" : @"Load the rear cabin without any hassle, we're flexible.",
                      @"Target_2" : @"You can quickly and safely load the van from either side.",
                      @"Target_3" : @"A great curb-to-curb turning radius is my specialty.",
-                     @"Target_4" : @"We can open wide for unobstructed loading.",
+                     @"Target_4" : @"We can open wide for unobstructed loading.\n ",
                      @"Target_5" : @"Compact van? Loading cargo feels more like a full-size cargo van.",
                      @"Target_6" : @"This is when your cargo says, \"Doors? What doors?\"",
                      @"Target_7" : @"Flat load plywood or a couple pallets of cargo...I got this.",
                      @"Target_8" : @"An early start or a long day, we brighten your whole day.",
-                     @"Target_9" : @"Powered mobile office...got it!",
-                     @"Target_10" : @"I can charge your power tools anytime.",
-                     @"Target_11" : @"Sometimes you need to think inside the box.",
-                     @"Target_12" : @"There is no doubt you will stop when you need to.",
-                     @"Target_13" : @"Safety...check!",
-                     @"Target_14" : @"Stop crouching and stand up!",
+                     @"Target_9" : @"Powered mobile office...got it!\n ",
+                     @"Target_10" : @"I can charge your power tools anytime.\n ",
+                     @"Target_11" : @"Sometimes you need to think inside the box.\n ",
+                     @"Target_12" : @"There is no doubt you will stop when you need to.\n ",
+                     @"Target_13" : @"Safety...check!\n \n ",
+                     @"Target_14" : @"Stop crouching and stand up!\n ",
                      @"Target_15" : @"We're here to help strap down those heavy packages.",
                      @"Target_16" : @"Installing shelves, cabinets and racks are no problem with these.",
                      @"Target_17" : @"Is it a seat or a desk?...What is your preference?",
-                     @"Target_18" : @"A fully organized mobile office at your fingertips."};
+                     @"Target_18" : @"A fully organized mobile office at your fingertips.\n "};
             break;
     }
     
@@ -223,7 +223,7 @@
     
     for (int i = 0; i < 7; i++)
     {
-        CGRect newCardFrame = CGRectMake(0, 0, 82, 115);
+        CGRect newCardFrame = CGRectMake(0, 0, 75, 105);
         PlayingCardView *newCard = [[PlayingCardView alloc] initWithFrame:newCardFrame andIsSmall:YES];
         
         [self.handCardViews addObject:newCard];
@@ -271,12 +271,9 @@
 
 -(void)targetAcquired:(NSNotification *)notification{
     
-    //TODO: fix area of interest for AR
-    
     NSDictionary *userinfo = [notification userInfo];
     
     NSString *arTargetName = [userinfo objectForKey:@"targetName"];
-    NSLog(@"Target %@ acquired", arTargetName);
     
     /*
     float xlocInGlSpace = [(NSNumber *)[userinfo objectForKey:@"x-ingl"] floatValue];
@@ -289,6 +286,8 @@
     */
     if ( [self.validARTargetValues containsObject:arTargetName] && !self.isPoppedUp)
     {
+        NSLog(@"Target %@ acquired", arTargetName);
+        
         [self.validARTargetValues removeObject: arTargetName];
         [self.remainingHints removeObjectForKey:arTargetName];
         
@@ -321,21 +320,27 @@
 
     if ([[AppDelegate sharedAppDelegate].currentPlayer.pokerHand.hand count] < 7)
     {
-        NSMutableAttributedString *hintText = [[NSMutableAttributedString alloc] initWithString:[@"NEXT CARD: " stringByAppendingString:[self getRandomHint]] ];
-        [hintText addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanRed] range:NSMakeRange(0, 10)];
-        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Bold" size:19.0f] range:NSMakeRange(0, 10)];
-        [hintText addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanGrey] range:NSMakeRange(10, hintText.length - 10)];
-        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Md" size:19.0f] range:NSMakeRange(10, hintText.length - 10)];
+        NSMutableAttributedString *hintText = [[NSMutableAttributedString alloc] initWithString:[@"NEXT CARD:\n" stringByAppendingString:[self getRandomHint]] ];
+        [hintText addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, hintText.length)];
+        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Bold" size:22.0f] range:NSMakeRange(0, 10)];
+        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Md" size:22.0f] range:NSMakeRange(10, hintText.length - 10)];
+        
+        NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragrahStyle setLineSpacing:0];
+        [hintText addAttribute:NSParagraphStyleAttributeName value:paragrahStyle range:NSMakeRange(0, [hintText length])];
         
         self.hintLabel.attributedText = hintText;
     }
     
     else {
-        NSMutableAttributedString *hintText = [[NSMutableAttributedString alloc] initWithString:@"WELL DONE! Now see your final hand and submit it to the leaderboard."];
-        [hintText addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanRed] range:NSMakeRange(0, 10)];
-        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Bold" size:19.0f] range:NSMakeRange(0, 10)];
-        [hintText addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanGrey] range:NSMakeRange(10, hintText.length - 10)];
-        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Md" size:19.0f] range:NSMakeRange(10, hintText.length - 10)];
+        NSMutableAttributedString *hintText = [[NSMutableAttributedString alloc] initWithString:@"WELL DONE!\nNow see your final hand and submit it to the leaderboard."];
+        [hintText addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, hintText.length)];
+        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Bold" size:22.0f] range:NSMakeRange(0, 10)];
+        [hintText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Md" size:22.0f] range:NSMakeRange(10, hintText.length - 10)];
+        
+        NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragrahStyle setLineSpacing:0];
+        [hintText addAttribute:NSParagraphStyleAttributeName value:paragrahStyle range:NSMakeRange(0, [hintText length])];
         
         self.hintLabel.attributedText = hintText;
     }
@@ -344,7 +349,7 @@
                       duration:1.0
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        self.bannerView.image = [UIImage imageNamed:@"Top"];
+                        self.bannerView.image = [UIImage imageNamed:@"TopRibbon"];
                     } completion:nil];
     
     [UIView animateWithDuration:1.0
@@ -396,7 +401,7 @@
                           duration:.75
                            options:UIViewAnimationOptionTransitionCrossDissolve
                         animations:^{
-                            self.bannerView.image = [UIImage imageNamed:@"TopChip"];
+                            self.bannerView.image = [UIImage imageNamed:@"TopChipRibbon"];
                         } completion:nil];
         
         [UIView animateWithDuration:.75

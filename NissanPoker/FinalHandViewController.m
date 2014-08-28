@@ -27,7 +27,7 @@
 
 @property (nonatomic) __block BOOL networkingComplete;
 @property (nonatomic) __block BOOL networkingSucessful;
-@property (nonatomic) BOOL timeoutComplete;
+@property (nonatomic) BOOL userSubmitted;
 
 @end
 
@@ -61,12 +61,12 @@
     
     [handDescriptionAttr addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanGrey] range:NSMakeRange(0, 16)];
     [handDescriptionAttr addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanRed] range:NSMakeRange(16, handDescriptionAttr.length - 16)];
-    [handDescriptionAttr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Bold" size:35.0f] range:NSMakeRange(0, handDescriptionAttr.length)];
+    [handDescriptionAttr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Bold" size:33.0f] range:NSMakeRange(0, handDescriptionAttr.length)];
     
     self.handDescriptionLabel.attributedText = handDescriptionAttr;
     
     
-    NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:@"Check the Leaderboard to see if your hand is in the top ten!"];
+    NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:@"Check the Leaderboard to see if your hand is in the top 10!"];
     
     [subtitle addAttribute:NSForegroundColorAttributeName value:[AppDelegate nissanGrey] range:NSMakeRange(0, subtitle.length)];
     [subtitle addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"NissanPro-Md" size:22.0f] range:NSMakeRange(0, subtitle.length)];
@@ -80,7 +80,7 @@
     {
         int xPos = 70 + (150*i);
         
-        CGRect newCardFrame = CGRectMake(xPos, 163, 275, 395);
+        CGRect newCardFrame = CGRectMake(xPos, 141, 275, 395);
         PlayingCardView *newCard = [[PlayingCardView alloc] initWithFrame:newCardFrame andIsSmall:NO];
         [newCard setRankAndSuitFromCard:self.bestHandArray[i]];
         [newCard flipCard];
@@ -89,16 +89,10 @@
         [self.view addSubview:newCard];
     }
     
-    //Setup the timeout and networking
-    self.timeoutComplete = NO;
+    //Setup the submit status and networking status
+    self.userSubmitted = NO;
     self.networkingComplete = NO;
     self.networkingSucessful = NO;
-    
-    int delay = [[NSUserDefaults standardUserDefaults] integerForKey:@"timeout"];
-    
-    if (delay < 61) {
-        [self performSelector:@selector(timeoutCompleted) withObject:nil afterDelay:delay];
-    }
 
     [self submitUser];
     
@@ -166,21 +160,14 @@
 
 }
 
-- (IBAction)overrideTimeout:(id)sender
-{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(timeoutCompleted) object:nil];
-    [self timeoutCompleted];
-}
-
-- (void)timeoutCompleted
-{
-    self.timeoutComplete = YES;
+- (IBAction)userSubmitted:(id)sender {
+    self.userSubmitted = YES;
     [self transitionIfDone];
 }
 
 - (void)transitionIfDone
 {
-    if (self.networkingComplete && self.timeoutComplete) {
+    if (self.networkingComplete && self.userSubmitted) {
         
         if (self.networkingSucessful) {
             [SVProgressHUD showSuccessWithStatus:@"Uploaded Hand!"];
@@ -194,7 +181,7 @@
         
     }
     
-    else if (self.timeoutComplete && !self.networkingComplete)
+    else if (self.userSubmitted && !self.networkingComplete)
     {
         
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
