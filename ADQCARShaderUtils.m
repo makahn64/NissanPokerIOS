@@ -7,6 +7,7 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 ===============================================================================*/
 
 #import "ADQCARShaderUtils.h"
+#import <OpenGLES/ES2/glext.h>
 
 @implementation ADQCARShaderUtils
 

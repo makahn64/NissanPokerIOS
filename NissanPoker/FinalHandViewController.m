@@ -27,6 +27,7 @@
 
 @property (nonatomic) __block BOOL networkingComplete;
 @property (nonatomic) __block BOOL networkingSucessful;
+@property (nonatomic) __block BOOL isTopTen;
 @property (nonatomic) BOOL userSubmitted;
 
 @end
@@ -93,6 +94,7 @@
     self.userSubmitted = NO;
     self.networkingComplete = NO;
     self.networkingSucessful = NO;
+    self.isTopTen = NO;
 
     [self submitUser];
     
@@ -111,7 +113,7 @@
     AppDelegate *ad = [AppDelegate sharedAppDelegate];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     NSDictionary *name = @{@"firstName": ad.currentPlayer.firstName,
                            @"lastName": ad.currentPlayer.lastName};
@@ -141,16 +143,39 @@
     */
     NSString *baseURL = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardAddress"];
     NSString *submitURL = [baseURL stringByAppendingString:@"/players/register"];
+    __block NSString *topTenURL = [baseURL stringByAppendingString:@"/players/leaderboard"];
     
     [manager POST:submitURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"HTTP: %@", responseObject);
+        
         self.networkingComplete = YES;
         self.networkingSucessful = YES;
+        
+        [manager GET:topTenURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"HTTP: %@", responseObject);
+            
+            NSArray *responseJSON = responseObject;
+            
+            for (NSDictionary *playerInfo in responseJSON) {
+                
+                NSNumber *score = [playerInfo objectForKey:@"score"];
+                int playerScore = [score intValue];
+                
+                if (playerScore <= ad.currentPlayer.pokerHand.handValue) {
+                    self.isTopTen = true;
+                    break;
+                }
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error Collecting Top Ten: %@", error);
+        }];
         
         [self transitionIfDone];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        NSLog(@"Error Submitting: %@", error);
         [[AppDelegate sharedAppDelegate] addCurentCustomerToCoreData];
         self.networkingComplete = YES;
         self.networkingSucessful = NO;
@@ -169,15 +194,20 @@
 {
     if (self.networkingComplete && self.userSubmitted) {
         
-        if (self.networkingSucessful) {
-            [SVProgressHUD showSuccessWithStatus:@"Uploaded Hand!"];
+        UIAlertView *topTenAlert = [[UIAlertView alloc] initWithTitle:@"Thanks for playing!"
+                                                              message:@"Unfortunately, your hand is not in the top ten. Best of luck next time!"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Finish"
+                                                    otherButtonTitles:nil];
+        if (!self.networkingSucessful) {
+            topTenAlert.message = @"Your hand will uploaded when the connection is restored. Check back later to see if you are in the top ten!";
         }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:@"Failed, please try again later."];
+        else if (self.isTopTen) {
+            topTenAlert.title = @"Congratulations!";
+            topTenAlert.message = @"Your hand is in the top ten! Check in later to see if you keep your standing.";
         }
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [topTenAlert show];
         
     }
     
@@ -189,6 +219,22 @@
         
     }
     
+}
+
+#pragma mark - Reactions
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+
+    if (self.networkingSucessful) {
+        [SVProgressHUD showSuccessWithStatus:@"Uploaded Hand!"];
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"No Connection"];
+    }
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
 }
 
 /*

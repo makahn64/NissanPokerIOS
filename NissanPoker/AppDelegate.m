@@ -31,8 +31,17 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"http://node.appdelegates.net:8003" forKey:@"leaderboardAddress"];
         [[NSUserDefaults standardUserDefaults] setInteger:10 forKey:@"timeout"];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"QRScanningEnabled"];
-        [[NSUserDefaults standardUserDefaults] setInteger:NV200 forKey:@"targetVehicle"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunchedBefore"];
+        [[NSUserDefaults standardUserDefaults] setInteger:NV200 forKey:@"targetVehicle"];
+        
+        #ifdef NV200
+            [[NSUserDefaults standardUserDefaults] setInteger: forKey:@"targetVehicle"];
+        #elif CARGOSR
+            [[NSUserDefaults standardUserDefaults] setInteger:NV_CARGO_STANDARD forKey:@"targetVehicle"];
+        #elif CARGOHR
+            [[NSUserDefaults standardUserDefaults] setInteger:NV_CARGO_HIGH_ROOF forKey:@"targetVehicle"];
+        #endif
+        
         [[NSUserDefaults standardUserDefaults] synchronize];
         
     }

@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>NissanPoker.xcscheme</key>
+		<key>Poker 200.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>Poker HR.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Poker SR.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -18,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>80489B4519649E9900362A45</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80FF393219EDA2060074205A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80FF398719EDA20A0074205A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

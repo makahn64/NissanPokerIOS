@@ -76,6 +76,8 @@
     }
     
     self.targetVehicleControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"targetVehicle"];
+    self.targetVehicleControl.userInteractionEnabled = NO;
+    self.targetVehicleControl.tintColor = [UIColor grayColor];
     
     self.timeoutSlider.value = [[NSUserDefaults standardUserDefaults] integerForKey:@"timeout"];
     [self updateTimeoutLabels];
@@ -469,6 +471,8 @@
                 
                 NSString *failStatus = [NSString stringWithFormat:@"Failed to Upload %d games", [self.savedHands count] - successes];
                 
+                [self setUpCoreDataElements];
+                
                 [SVProgressHUD showErrorWithStatus:failStatus];
                 
             }
@@ -487,7 +491,6 @@
             
         }];
     }
-    
     
 }
 
